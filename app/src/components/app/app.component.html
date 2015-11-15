@@ -1,0 +1,30 @@
+<md-content layout="column" flex layout-fill ng-cloak class="main-content">
+  <md-toolbar md-scroll-shrink>
+    <div class="md-toolbar-tools">
+      <h2 flex>Open peer instruction</h2>
+      <span ng-show="app.usuario.perfil" layout="row">
+        <md-button class="md-icon-button" ui-sref="inicio" aria-label="Ir para página inicial">
+          <md-tooltip>Página inicial</md-tooltip>
+          <md-icon md-font-icon="fa-home" class="fa fa-2x"></md-icon>
+        </md-button>
+        <md-button ui-sref="turma-list" class="md-icon-button"
+                   aria-label="Ir para tela professor"
+                   ng-show="app.usuario.perfil.professor">
+          <md-tooltip>Professor</md-tooltip>
+          <md-icon md-font-icon="fa-graduation-cap" class="fa fa-2x"></md-icon>
+        </md-button>
+        <md-button ui-sref="perfil" class="md-icon-button" aria-label="Ir para o seu perfil">
+          <md-tooltip>Perfil</md-tooltip>
+          <img ng-src="{{ app.usuario.perfil.image }}">
+        </md-button>
+        <md-button class="md-icon-button" ui-sref="login" aria-label="Sair">
+          <md-tooltip>Sair</md-tooltip>
+          <md-icon md-font-icon="fa-sign-out" class="fa fa-2x"></md-icon>
+        </md-button>
+      </span>
+    </div>
+  </md-toolbar>
+  <md-content class="view-content">
+    <div ui-view></div>
+  </md-content>
+</md-content>

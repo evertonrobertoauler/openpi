@@ -1,0 +1,12 @@
+<md-content layout="column" layout-align="center center">
+  <br/>
+  <img ng-src="{{ perfil.usuario.perfil.image }}" style="width: 200px"/>
+
+  <h3>{{ perfil.usuario.perfil.name }}</h3>
+
+  <md-checkbox ng-model="perfil.usuario.perfil.professor" class="md-primary"
+               ng-change="perfil.usuario.perfil.$save()">
+    Professor
+  </md-checkbox>
+  <br/>
+</md-content>

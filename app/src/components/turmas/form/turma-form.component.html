@@ -1,0 +1,30 @@
+<md-content class="md-padding autocomplete">
+  <form layout="column">
+    <h3 style="text-align: center">Turma</h3>
+    <md-input-container>
+      <label>Nome</label>
+      <input ng-model="form.turma.nome" ng-change="form.turma.$save()">
+    </md-input-container>
+    <md-subheader class="md-no-sticky">Alunos</md-subheader>
+    <md-contact-chips ng-model="form.modelAlunos"
+                      md-contacts="form.filtrarUsuarios($query)"
+                      md-contact-name="name"
+                      md-contact-image="image"
+                      md-require-match="true"
+                      md-highlight-flags="i"
+                      filter-selected="false">
+    </md-contact-chips>
+    <md-list ng-show="form.usuariosDisponiveis.length !== 0">
+      <md-subheader class="md-no-sticky">Alunos disponíveis</md-subheader>
+      <md-list-item class="md-2-line"
+                    ng-repeat="(index, contact) in form.usuariosDisponiveis | limitTo:10"
+                    ng-click="form.modelAlunos.push(contact)">
+        <img ng-src="{{contact.image}}" class="md-avatar" alt="{{contact.name}}"/>
+
+        <div class="md-list-item-text compact">
+          <h3>{{contact.name}}</h3>
+        </div>
+      </md-list-item>
+    </md-list>
+  </form>
+</md-content>

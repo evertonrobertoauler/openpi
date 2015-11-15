@@ -1,0 +1,8 @@
+$fa-font-path: '../../node_modules/font-awesome/fonts' !default;
+
+@import '../../node_modules/angular-material/angular-material.scss';
+@import '../../node_modules/font-awesome/scss/font-awesome.scss';
+@import 'components/app/app.component';
+@import 'components/login/login.component';
+@import 'components/turmas/form/turma-form.component';
+@import 'components/turmas/list/turma-list.component';

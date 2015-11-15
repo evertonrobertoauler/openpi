@@ -1,0 +1,19 @@
+<md-content layout="column" layout-align="center center">
+
+  <img src="../../img/peer-instruction.png" alt="Peer instruction" width="400px">
+
+  <h3>Faça o login utilizando a sua rede social</h3>
+
+  <div>
+    <md-button class="md-raised"
+               aria-label="Login com facebook"
+               ng-click="login.usuario.login('facebook')">
+      <img src="../../img/facebook.png" alt="Facebook"/>
+    </md-button>
+    <md-button class="md-raised" aria-label="Login com google">
+      <img src="../../img/google.png" alt="Google"
+           ng-click="login.usuario.login('google')"/>
+    </md-button>
+  </div>
+</md-content>
+
