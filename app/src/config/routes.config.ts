@@ -24,6 +24,11 @@ export class RoutesConfig {
         template: '<turma-list></turma-list>',
         resolve: {loginRequired}
       })
+      .state('turma-view', {
+        url: '/turma/view/:id',
+        template: '<turma-view></turma-view>',
+        resolve: {loginRequired}
+      })
       .state('turma-form', {
         url: '/turma/form/:id',
         template: '<turma-form></turma-form>',

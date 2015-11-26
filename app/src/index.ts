@@ -22,6 +22,7 @@ import {login} from './components/login/login.component';
 import {inicio} from './components/inicio/inicio.component';
 import {perfil} from './components/perfil/perfil.component';
 import {turmaList} from './components/turmas/list/turma-list.component';
+import {turmaView} from './components/turmas/view/turma-view.component';
 import {turmaForm} from './components/turmas/form/turma-form.component';
 
 ngModule
@@ -38,6 +39,7 @@ ngModule
   .directive('inicio', inicio)
   .directive('perfil', perfil)
   .directive('turmaList', turmaList)
+  .directive('turmaView', turmaView)
   .directive('turmaForm', turmaForm);
 
 const element = angular.element(document);
