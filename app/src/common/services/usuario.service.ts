@@ -38,7 +38,7 @@ export class Usuario {
   }
 
   obterUsuarios() {
-    return this.$firebaseObject(new Firebase(`${this.FIREBASE_URL}/usuarios`)).$loaded();
+    return this.$firebaseObject(new Firebase(`${this.FIREBASE_URL}/usuarios`));
   }
 
   setarDadosPerfil() {

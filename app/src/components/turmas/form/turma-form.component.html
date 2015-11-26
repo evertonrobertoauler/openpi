@@ -1,10 +1,20 @@
 <md-content class="md-padding autocomplete">
   <form layout="column">
+    <md-button class="md-icon-button" aria-label="Voltar" ng-click="form.voltar()">
+      <md-icon md-font-icon="fa-arrow-left " class="fa fa-2x"></md-icon>
+    </md-button>
     <h3 style="text-align: center">Turma</h3>
-    <md-input-container>
-      <label>Nome</label>
-      <input ng-model="form.turma.nome" ng-change="form.turma.$save()">
-    </md-input-container>
+    <div layout="row">
+      <md-input-container flex>
+        <label>Nome</label>
+        <input ng-model="form.turma.nome" ng-blur="form.turma.nome && form.turma.$save()"/>
+      </md-input-container>
+      <md-input-container>
+        <md-button class="md-icon-button" aria-label="Excluir" ng-click="form.excluir($event)">
+          <md-icon md-font-icon="fa-trash " class="fa fa-2x"></md-icon>
+        </md-button>
+      </md-input-container>
+    </div>
     <md-subheader class="md-no-sticky">Alunos</md-subheader>
     <md-contact-chips ng-model="form.modelAlunos"
                       md-contacts="form.filtrarUsuarios($query)"

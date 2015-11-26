@@ -20,5 +20,8 @@
       <p>{{ turma.nome }}</p>
       <md-icon md-font-icon="fa-pencil-square-o" class="fa fa-2x"></md-icon>
     </md-list-item>
+    <md-list-item ng-if="list.loaded && !list.turmas.length">
+      Nenhuma turma foi cadastrada até o momento.
+    </md-list-item>
   </md-list>
 </md-content>

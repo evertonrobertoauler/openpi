@@ -15,8 +15,12 @@ class ListComponent {
 
   public turmas;
 
+  public loaded = false;
+
   constructor(private $filter, private $state, $scope, private turma: Turma) {
     this.turmas = turma.obterTurmas();
+
+    this.turmas.$loaded(() => this.loaded = true);
 
     $scope.$on('$destroy', () => this.turmas.$destroy());
   }

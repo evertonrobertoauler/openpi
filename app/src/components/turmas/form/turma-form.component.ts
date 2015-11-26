@@ -14,7 +14,7 @@ export function turmaForm() {
 }
 
 class FormComponent {
-  static $inject = ['$filter', '$scope', '$stateParams', 'Usuario', 'Turma'];
+  static $inject = ['$filter', '$scope', '$q', '$state', '$stateParams', '$mdDialog', 'Usuario', 'Turma'];
 
   public modelAlunos = [];
 
@@ -24,25 +24,42 @@ class FormComponent {
 
   public usuariosDisponiveis = [];
 
-  constructor(private $filter, $scope, $stateParams, private usuario: Usuario, private turmaService: Turma) {
+  private usuarios;
 
+  constructor(private $filter, $scope, $q, private $state, $stateParams, private $mdDialog, private usuario: Usuario,
+              private turmaService: Turma) {
     this.turma = this.turmaService.obterTurma($stateParams.id);
+    this.usuarios = usuario.obterUsuarios();
 
-    usuario.obterUsuarios().then((usuarios) => {
+    $q.all([this.usuarios.$loaded(), this.turma.$loaded()])
+      .then(() => {
+        this.usuarios.$watch(() => this.onUsuariosUpdate(this.usuarios));
+        $scope.$watch('form.modelAlunos.length', () => this.onUsuariosUpdate(this.usuarios));
 
-      usuarios.$watch(() => this.onUsuariosUpdate(usuarios));
-      $scope.$watch('form.modelAlunos.length', () => this.onUsuariosUpdate(usuarios));
-      $scope.$on('$destroy', () => {
-        usuarios.$destroy();
-        this.turma.$destroy();
-      });
-
-      this.turma.$loaded(() => {
-        this.modelAlunos = (this.turma.alunos || []).map(a => usuarios[a]).filter(u => u !== undefined);
+        this.modelAlunos = (this.turma.alunos || []).map(a => this.usuarios[a]).filter(u => u !== undefined);
         this.loaded = true;
       });
+
+    $scope.$on('$destroy', () => {
+      this.usuarios.$destroy();
+      this.turma.$destroy();
     });
   }
+
+  excluir($event) {
+    const confirm = this.$mdDialog.confirm().title('Tem certeza que quer excluir esta turma?')
+      .ariaLabel('Excluir turma').targetEvent($event).ok('Sim').cancel('Não');
+
+    this.$mdDialog.show(confirm).then(() => {
+      this.turma.$remove();
+      this.voltar();
+    });
+  }
+
+  voltar() {
+    this.$state.go('turma-list');
+  }
+
 
   onUsuariosUpdate(usuarios) {
     delete usuarios[this.usuario.authData.uid];
