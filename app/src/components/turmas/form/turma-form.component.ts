@@ -14,7 +14,7 @@ export function turmaForm() {
 }
 
 class FormComponent {
-  static $inject = ['$filter', '$scope', '$q', '$state', '$stateParams', '$mdDialog', 'Usuario', 'Turma'];
+  static $inject = ['$filter', '$scope', '$state', '$stateParams', 'Usuario', 'Turma'];
 
   public modelAlunos = [];
 
@@ -26,38 +26,25 @@ class FormComponent {
 
   private usuarios;
 
-  constructor(private $filter, $scope, $q, private $state, $stateParams, private $mdDialog, private usuario: Usuario,
+  constructor(private $filter, $scope, private $state, $stateParams, private usuario: Usuario,
               private turmaService: Turma) {
     this.turma = this.turmaService.obterTurma($stateParams.id);
     this.usuarios = usuario.obterUsuarios();
 
-    $q.all([this.usuarios.$loaded(), this.turma.$loaded()])
-      .then(() => {
+    this.turmaService
+      .obterAlunos(this.turma)
+      .then(alunos => {
+        this.modelAlunos = alunos;
+
         this.usuarios.$watch(() => this.onUsuariosUpdate(this.usuarios));
         $scope.$watch('form.modelAlunos.length', () => this.onUsuariosUpdate(this.usuarios));
 
-        this.modelAlunos = (this.turma.alunos || []).map(a => this.usuarios[a]).filter(u => u !== undefined);
         this.loaded = true;
       });
-
-    $scope.$on('$destroy', () => {
-      this.usuarios.$destroy();
-      this.turma.$destroy();
-    });
-  }
-
-  excluir($event) {
-    const confirm = this.$mdDialog.confirm().title('Tem certeza que quer excluir esta turma?')
-      .ariaLabel('Excluir turma').targetEvent($event).ok('Sim').cancel('Não');
-
-    this.$mdDialog.show(confirm).then(() => {
-      this.turma.$remove();
-      this.voltar();
-    });
   }
 
   voltar() {
-    this.$state.go('turma-list');
+    this.$state.go('turma-view', {id: this.turma.$id});
   }
 
 

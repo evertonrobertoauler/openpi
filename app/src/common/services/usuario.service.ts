@@ -1,6 +1,6 @@
-import * as Firebase from 'firebase';
+import {Firebase} from './firebase.service';
 
-interface IPerfil extends AngularFireObject {
+export interface IPerfil extends AngularFireObject {
   id: string;
   name: string;
   image: string;
@@ -8,16 +8,13 @@ interface IPerfil extends AngularFireObject {
 }
 
 export class Usuario {
-  static $inject = ['FIREBASE_URL', '$firebaseAuth', '$firebaseObject', '$state'];
+  static $inject = ['Firebase', '$state'];
 
-  public authObj: AngularFireAuth;
   public perfil: IPerfil;
   public authData: any;
 
-  constructor(private FIREBASE_URL, $firebaseAuth, private $firebaseObject, $state) {
-    this.authObj = $firebaseAuth(new Firebase(this.FIREBASE_URL));
-
-    this.authObj.$onAuth((data) => {
+  constructor(private firebase: Firebase, $state) {
+    this.firebase.auth.$onAuth((data) => {
       if (data) {
         this.authData = data;
         this.salvarPerfil();
@@ -29,7 +26,7 @@ export class Usuario {
   }
 
   salvarPerfil() {
-    this.perfil = this.$firebaseObject(new Firebase(`${this.FIREBASE_URL}/usuarios/${this.authData.uid}`));
+    this.perfil = <IPerfil>this.firebase.loadObject(`/usuarios/${this.authData.uid}`);
     this.setarDadosPerfil();
     return this.perfil.$loaded().then(() => {
       this.setarDadosPerfil();
@@ -38,7 +35,7 @@ export class Usuario {
   }
 
   obterUsuarios() {
-    return this.$firebaseObject(new Firebase(`${this.FIREBASE_URL}/usuarios`));
+    return this.firebase.loadObject('/usuarios');
   }
 
   setarDadosPerfil() {
@@ -70,24 +67,21 @@ export class Usuario {
   }
 
   login(provider) {
-    return this.authObj.$authWithOAuthPopup(provider);
+    return this.firebase.auth.$authWithOAuthPopup(provider);
   }
 
   logout() {
-    this.authObj.$unauth();
+    this.firebase.unload();
+    this.firebase.auth.$unauth();
     this.authData = null;
-
-    if (this.perfil) {
-      this.perfil.$destroy();
-      this.perfil = null;
-    }
+    this.perfil = null;
   }
 }
 
-loginRequired.$inject = ['Usuario'];
+loginRequired.$inject = ['Firebase'];
 
-export function loginRequired(usuario: Usuario) {
-  return usuario.authObj.$requireAuth().then(user => {
+export function loginRequired(firebase: Firebase) {
+  return firebase.auth.$requireAuth().then(user => {
     return user;
   });
 }

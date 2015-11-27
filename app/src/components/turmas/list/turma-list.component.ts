@@ -11,22 +11,20 @@ export function turmaList() {
 }
 
 class ListComponent {
-  static $inject = ['$filter', '$state', '$scope', 'Turma'];
+  static $inject = ['$filter', '$state', 'Turma'];
 
   public turmas;
 
   public loaded = false;
 
-  constructor(private $filter, private $state, $scope, private turma: Turma) {
+  constructor(private $filter, private $state, private turma: Turma) {
     this.turmas = turma.obterTurmas();
 
     this.turmas.$loaded(() => this.loaded = true);
-
-    $scope.$on('$destroy', () => this.turmas.$destroy());
   }
 
   abrirForm(turma) {
-    this.$state.go('turma-form', {id: turma.$id});
+    this.$state.go('turma-view', {id: turma.$id});
   }
 
   novaTurma(dados) {

@@ -13,6 +13,7 @@ import './index.css';
 
 import {RoutesConfig, RoutesErrorConfig} from './config/routes.config';
 
+import {Firebase} from './common/services/firebase.service';
 import {Usuario} from './common/services/usuario.service';
 import {Turma} from './common/services/turma.service';
 import {Avaliacao} from './common/services/avaliacao.service';
@@ -30,6 +31,7 @@ ngModule
   .config(RoutesConfig)
   .run(RoutesErrorConfig)
 
+  .service('Firebase', Firebase)
   .service('Usuario', Usuario)
   .service('Turma', Turma)
   .service('Avaliacao', Avaliacao)

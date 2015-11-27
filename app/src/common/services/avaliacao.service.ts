@@ -1,12 +1,12 @@
-import * as Firebase from 'firebase';
+import {Firebase} from './firebase.service';
 
 export class Avaliacao {
-  static $inject = ['FIREBASE_URL', '$firebaseArray'];
+  static $inject = ['Firebase'];
 
-  constructor(private FIREBASE_URL, private $firebaseArray) {
+  constructor(private firebase: Firebase) {
   }
 
   obterAvaliacoes() {
-    return this.$firebaseArray(new Firebase(`${this.FIREBASE_URL}/turmas`)).$loaded();
+    return this.firebase.loadArray(``);
   }
 }
