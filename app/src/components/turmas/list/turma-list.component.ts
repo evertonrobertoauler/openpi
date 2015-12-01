@@ -30,7 +30,10 @@ class ListComponent {
   novaTurma(dados) {
     this.turmas
       .$add({nome: dados.nome})
-      .then(ref => this.$state.go('turma-form', {id: ref.key()}));
+      .then((ref: Firebase) => {
+        ref.setPriority(-Date.now());
+        this.$state.go('turma-form', {id: ref.key()});
+      });
 
     dados.nome = '';
   }

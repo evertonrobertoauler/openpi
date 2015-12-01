@@ -22,7 +22,7 @@ export class Turma {
 
   obterAlunos(turma: ITurma) {
     return this.$q
-      .all([turma.$loaded(), this.firebase.loadObject('/usuarios')])
+      .all([turma.$loaded(), this.firebase.loadObject('/usuarios').$loaded()])
       .then(list => {
         const usuarios = list.pop();
         return  (turma.alunos || []).map(a => usuarios[a]).filter(u => u !== undefined);

@@ -23,7 +23,7 @@ class ViewComponent {
 
     this.turmaService
       .obterAlunos(this.turma)
-      .then(alunos => this.alunos = alunos);
+      .then(alunos => this.alunos = alunos.map(a => a.name).join(', '));
   }
 
   voltar() {
