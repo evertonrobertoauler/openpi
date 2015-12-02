@@ -5,10 +5,9 @@
       <input ng-model="dados.nome"/>
     </md-input-container>
     <md-input-container>
-      <md-button class="md-raised md-primary"
-                 aria-label="Adicionar nova turma"
-                 ng-disabled="!dados.nome">
+      <md-button class="md-raised md-primary" ng-disabled="!dados.nome">
         Adicionar
+        <md-tooltip>Adicionar turma</md-tooltip>
       </md-button>
     </md-input-container>
   </form>
@@ -19,6 +18,7 @@
                   ng-click="list.abrirForm(turma)">
       <p><b>{{ turma.nome }}</b></p>
       <md-icon md-font-icon="fa-eye" class="fa fa-2x"></md-icon>
+      <md-tooltip>Visualizar turma</md-tooltip>
     </md-list-item>
     <md-list-item ng-if="list.loaded && !list.turmas.length">
       Nenhuma turma foi cadastrada até o momento.
