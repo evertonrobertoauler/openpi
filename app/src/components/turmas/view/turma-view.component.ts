@@ -1,5 +1,5 @@
 import {ITurma, Turma} from './../../../common/services/turma.service';
-import {IPerfil} from './../../../common/services/usuario.service';
+import * as _ from 'lodash';
 
 export function turmaView() {
   return {
@@ -15,15 +15,18 @@ class ViewComponent {
   static $inject = ['$stateParams', '$state', '$mdDialog', 'Turma'];
 
   public turma: ITurma;
-  public alunos: IPerfil[];
+  public alunos: string;
 
   constructor($stateParams, private $state, private $mdDialog, private turmaService: Turma) {
-
     this.turma = this.turmaService.obterTurma($stateParams.id);
 
+    this.turma.$watch(() => this.setarAlunos());
+  }
+
+  setarAlunos() {
     this.turmaService
       .obterAlunos(this.turma)
-      .then(alunos => this.alunos = alunos.map(a => a.name).join(', '));
+      .then(alunos => this.alunos = _.sortBy(alunos.map(a => a.name)).join(', '));
   }
 
   voltar() {
