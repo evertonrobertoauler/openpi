@@ -16,29 +16,29 @@
     "Peer instruction"
   ],
   "dependencies": {
-    "angular": "^1.4.7",
-    "angular-animate": "^1.4.7",
-    "angular-aria": "^1.4.7",
+    "angular": "^1.4.8",
+    "angular-animate": "^1.4.8",
+    "angular-aria": "^1.4.8",
     "angular-material": "^0.11.4",
     "angular-ui-router": "^0.2.15",
     "angularfire": "^1.1.3",
-    "firebase": "^2.3.1",
-    "font-awesome": "^4.4.0",
+    "firebase": "^2.3.2",
+    "font-awesome": "^4.5.0",
     "lodash": "^3.10.1"
   },
   "devDependencies": {
     "css-loader": "^0.23.0",
-    "file-loader": "^0.8.4",
+    "file-loader": "^0.8.5",
     "gulp": "^3.9.0",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.1.0",
-    "html-loader": "^0.3.0",
+    "html-loader": "^0.4.0",
     "live-server": "^0.8.2",
     "style-loader": "^0.13.0",
-    "ts-loader": "^0.7.1",
+    "ts-loader": "^0.7.2",
     "tsd": "^0.6.5",
-    "tslint-loader": "^1.0.2",
-    "typescript": "^1.6.2",
-    "webpack": "^1.12.6"
+    "tslint-loader": "^2.1.0",
+    "typescript": "^1.7.3",
+    "webpack": "^1.12.9"
   }
 }
