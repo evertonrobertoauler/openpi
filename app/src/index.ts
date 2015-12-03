@@ -16,7 +16,7 @@ import {RoutesConfig, RoutesErrorConfig} from './config/routes.config';
 import {Firebase} from './common/services/firebase.service';
 import {Usuario} from './common/services/usuario.service';
 import {Turma} from './common/services/turma.service';
-import {Avaliacao} from './common/services/avaliacao.service';
+import {Questao} from './common/services/questao.service';
 
 import {app} from './components/app/app.component';
 import {login} from './components/login/login.component';
@@ -25,6 +25,8 @@ import {perfil} from './components/perfil/perfil.component';
 import {turmaList} from './components/turmas/list/turma-list.component';
 import {turmaView} from './components/turmas/view/turma-view.component';
 import {turmaForm} from './components/turmas/form/turma-form.component';
+import {questaoView} from './components/questoes/view/questao-view.component';
+import {questaoForm} from './components/questoes/form/questao-form.component';
 
 ngModule
   .value('FIREBASE_URL', 'https://openpi.firebaseio.com/')
@@ -34,7 +36,7 @@ ngModule
   .service('Firebase', Firebase)
   .service('Usuario', Usuario)
   .service('Turma', Turma)
-  .service('Avaliacao', Avaliacao)
+  .service('Questao', Questao)
 
   .directive('app', app)
   .directive('login', login)
@@ -42,7 +44,9 @@ ngModule
   .directive('perfil', perfil)
   .directive('turmaList', turmaList)
   .directive('turmaView', turmaView)
-  .directive('turmaForm', turmaForm);
+  .directive('turmaForm', turmaForm)
+  .directive('questaoView', questaoView)
+  .directive('questaoForm', questaoForm);
 
 const element = angular.element(document);
 
@@ -63,8 +67,7 @@ element.ready(() => {
  ---- list-turma
  ---- form-turma
  ---- view-turma
- -- avaliacoes
- ---- list-avaliacao
- ---- form-avaliacao
- ---- view-avaliacao
+ -- questoes
+ ---- form-questao
+ ---- view-questao
  */

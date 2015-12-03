@@ -33,6 +33,16 @@ export class RoutesConfig {
         url: '/turma/form/:id',
         template: '<turma-form></turma-form>',
         resolve: {loginRequired}
+      })
+      .state('questao-view', {
+        url: '/questao/view/:id',
+        template: '<questao-view></questao-view>',
+        resolve: {loginRequired}
+      })
+      .state('questao-form', {
+        url: '/questao/form/:id',
+        template: '<questao-form></questao-form>',
+        resolve: {loginRequired}
       });
 
     $urlRouterProvider.otherwise('/inicio');

@@ -25,7 +25,7 @@ export class Turma {
       .all([turma.$loaded(), this.firebase.loadObject('/usuarios').$loaded()])
       .then(list => {
         const usuarios = list.pop();
-        return  (turma.alunos || []).map(a => usuarios[a]).filter(u => u !== undefined);
+        return (turma.alunos || []).map(a => usuarios[a]).filter(u => u !== undefined);
       });
   }
 }

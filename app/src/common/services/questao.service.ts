@@ -1,6 +1,6 @@
 import {Firebase} from './firebase.service';
 
-export class Avaliacao {
+export class Questao {
   static $inject = ['Firebase'];
 
   constructor(private firebase: Firebase) {
