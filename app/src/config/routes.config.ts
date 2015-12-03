@@ -35,12 +35,12 @@ export class RoutesConfig {
         resolve: {loginRequired}
       })
       .state('questao-view', {
-        url: '/questao/view/:id',
+        url: '/questao/view/:turma/:id',
         template: '<questao-view></questao-view>',
         resolve: {loginRequired}
       })
       .state('questao-form', {
-        url: '/questao/form/:id',
+        url: '/questao/form/:turma/:id',
         template: '<questao-form></questao-form>',
         resolve: {loginRequired}
       });

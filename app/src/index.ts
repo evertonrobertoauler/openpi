@@ -71,3 +71,41 @@ element.ready(() => {
  ---- form-questao
  ---- view-questao
  */
+
+const model = {
+  turmas: {
+    t1: {
+      nome: 'Teste',
+      alunos: {
+        'google:103174776322595326817': true
+      },
+      questoes: {
+        q1: true
+      }
+    }
+  },
+  usuarios: {
+    'google:103174776322595326817': {
+      nome: 'Teste',
+      turmas: {
+        t1: true
+      }
+    }
+  },
+  questoes: {
+    q1: {
+      turma: 't1',
+      alunos: {
+        'google:103174776322595326817': 'a'
+      },
+      texto: 'Are you sure?',
+      respostas: {
+        a: 'YES',
+        b: 'NO'
+      },
+      resposta: 'a'
+    }
+  }
+};
+
+console.log(model);

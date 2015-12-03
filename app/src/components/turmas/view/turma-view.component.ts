@@ -20,6 +20,7 @@ class ViewComponent {
   constructor($stateParams, private $state, private $mdDialog, private turmaService: Turma) {
     this.turma = this.turmaService.obterTurma($stateParams.id);
 
+    this.setarAlunos();
     this.turma.$watch(() => this.setarAlunos());
   }
 
@@ -35,6 +36,10 @@ class ViewComponent {
 
   editar() {
     this.$state.go('turma-form', {id: this.turma.$id});
+  }
+
+  abrirFormQuestao() {
+    this.$state.go('questao-form', {turma: this.turma.$id});
   }
 
   excluir($event) {
