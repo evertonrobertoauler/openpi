@@ -11,8 +11,8 @@
     <md-subheader class="md-no-sticky">Alunos</md-subheader>
     <md-contact-chips ng-model="form.modelAlunos"
                       md-contacts="form.filtrarUsuarios($query)"
-                      md-contact-name="name"
-                      md-contact-image="image"
+                      md-contact-name="nome"
+                      md-contact-image="foto"
                       md-require-match="true"
                       md-highlight-flags="i"
                       filter-selected="false">
@@ -22,10 +22,10 @@
       <md-list-item class="md-2-line"
                     ng-repeat="(index, contact) in form.usuariosDisponiveis | limitTo:10"
                     ng-click="form.modelAlunos.push(contact)">
-        <img ng-src="{{contact.image}}" class="md-avatar" alt="{{contact.name}}"/>
+        <img ng-src="{{contact.foto}}" class="md-avatar" alt="{{contact.nome}}"/>
 
         <div class="md-list-item-text compact">
-          <h3>{{contact.name}}</h3>
+          <h3>{{contact.nome}}</h3>
         </div>
       </md-list-item>
     </md-list>

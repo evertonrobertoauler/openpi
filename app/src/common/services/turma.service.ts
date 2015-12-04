@@ -1,23 +1,24 @@
 import {Firebase} from './firebase.service';
+import {Usuario} from './usuario.service';
 
 export interface ITurma extends AngularFireObject {
   nome: string;
-  alunos: string[];
+  alunos: {[index: string]: any};
   professor: string;
 }
 
 export class Turma {
-  static $inject = ['Firebase', '$q'];
+  static $inject = ['Firebase', 'Usuario', '$q'];
 
-  constructor(private firebase: Firebase, private $q) {
+  constructor(private firebase: Firebase, private professor: Usuario, private $q) {
   }
 
   obterTurmas() {
-    return this.firebase.loadArray('/turmas');
+    return this.firebase.loadArray(`/turmas/${this.professor.id}`);
   }
 
   obterTurma(id) {
-    return <ITurma>this.firebase.loadObject(`/turmas/${id}`);
+    return <ITurma>this.firebase.loadObject(`/turmas/${this.professor.id}/${id}`);
   }
 
   obterAlunos(turma: ITurma) {
@@ -25,7 +26,7 @@ export class Turma {
       .all([turma.$loaded(), this.firebase.loadObject('/usuarios').$loaded()])
       .then(list => {
         const usuarios = list.pop();
-        return (turma.alunos || []).map(a => usuarios[a]).filter(u => u !== undefined);
+        return Object.keys(turma.alunos || {}).map(a => usuarios[a]).filter(u => u !== undefined);
       });
   }
 }

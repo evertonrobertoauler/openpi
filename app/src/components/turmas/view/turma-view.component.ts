@@ -27,7 +27,7 @@ class ViewComponent {
   setarAlunos() {
     this.turmaService
       .obterAlunos(this.turma)
-      .then(alunos => this.alunos = _.sortBy(alunos.map(a => a.name)).join(', '));
+      .then(alunos => this.alunos = _.sortBy(alunos.map(a => a.nome)).join(', '));
   }
 
   voltar() {

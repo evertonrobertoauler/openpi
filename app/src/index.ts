@@ -54,58 +54,59 @@ element.ready(() => {
   angular.bootstrap(element, [ngModule.name]);
 });
 
-/*
- menu
- -- app
- usuario
- -- login
- -- perfil
- aluno
- -- inicio
- professor
- -- turmas
- ---- list-turma
- ---- form-turma
- ---- view-turma
- -- questoes
- ---- form-questao
- ---- view-questao
- */
+//
+// menu
+//   app
+// usuario
+//   login
+//   perfil
+// aluno
+//   inicio
+// professor
+//   turmas
+//     list-turma
+//     form-turma
+//     view-turma
+//   questoes
+//     form-questao
+//     view-questao
 
-const model = {
-  turmas: {
-    t1: {
-      nome: 'Teste',
-      alunos: {
-        'google:103174776322595326817': true
-      },
-      questoes: {
-        q1: true
-      }
-    }
-  },
-  usuarios: {
-    'google:103174776322595326817': {
-      nome: 'Teste',
-      turmas: {
-        t1: true
-      }
-    }
-  },
-  questoes: {
-    q1: {
-      turma: 't1',
-      alunos: {
-        'google:103174776322595326817': 'a'
-      },
-      texto: 'Are you sure?',
-      respostas: {
-        a: 'YES',
-        b: 'NO'
-      },
-      resposta: 'a'
-    }
-  }
-};
+// const model = {
+//   turmas: {
+//     'google:103174776322595326817': {
+//       t1: {
+//         nome: 'Teste',
+//         alunos: {
+//           'google:103174776322595326817': false
+//         },
+//         questoes: {
+//           q1: true
+//         }
+//       }
+//     }
+//   },
+//   usuarios: {
+//     'google:103174776322595326817': {
+//       nome: 'Teste',
+//       turmas: {
+//         'google:103174776322595326817': {t1: true}
+//       }
+//     }
+//   },
+//   questoes: {
+//     q1: {
+//       turma: 't1',
+//       alunos: {
+//         'google:103174776322595326817': 'a'
+//       },
+//       texto: 'Are you sure?',
+//       respostas: {
+//         a: 'YES',
+//         b: 'NO'
+//       },
+//       resposta: 'a'
+//     }
+//   }
+// };
 
-console.log(model);
+// console.log(model);

@@ -2,8 +2,8 @@ import {Firebase} from './firebase.service';
 
 export interface IPerfil extends AngularFireObject {
   id: string;
-  name: string;
-  image: string;
+  nome: string;
+  foto: string;
   professor: boolean;
 }
 
@@ -39,12 +39,16 @@ export class Usuario {
   }
 
   setarDadosPerfil() {
-    this.perfil.id = this.authData.uid;
-    this.perfil.name = this.name;
-    this.perfil.image = this.image;
+    this.perfil.id = this.id;
+    this.perfil.nome = this.nome;
+    this.perfil.foto = this.foto;
   }
 
-  get name() {
+  get id() {
+    return this.authData && this.authData.uid;
+  }
+
+  get nome() {
     if (this.authData) {
       if (this.authData.facebook) {
         return this.authData.facebook.displayName;
@@ -55,7 +59,7 @@ export class Usuario {
     }
   }
 
-  get image() {
+  get foto() {
     if (this.authData) {
       if (this.authData.facebook) {
         return this.authData.facebook.profileImageURL;
@@ -78,11 +82,12 @@ export class Usuario {
   }
 }
 
-loginRequired.$inject = ['Firebase'];
+loginRequired.$inject = ['Firebase', 'Usuario'];
 
-export function loginRequired(firebase: Firebase) {
-  return firebase.auth.$requireAuth().then(user => {
-    return user;
+export function loginRequired(firebase: Firebase, usuario: Usuario) {
+  return firebase.auth.$requireAuth().then(authData => {
+    usuario.authData = authData;
+    return authData;
   });
 }
 

@@ -58,7 +58,7 @@ class FormComponent {
     this.modelAlunos = _.intersection(this.modelAlunos, todosUsuarios);
     this.usuariosDisponiveis = _.difference(todosUsuarios, this.modelAlunos);
 
-    this.turma.alunos = this.modelAlunos.map(a => a.id);
+    this.turma.alunos = _.zipObject(this.modelAlunos.map(a => a.id), _.range(this.modelAlunos.length).map(() => true));
 
     if (this.loaded) {
       this.turma.$save();
@@ -66,6 +66,6 @@ class FormComponent {
   }
 
   filtrarUsuarios(query) {
-    return this.$filter('filter')(this.usuariosDisponiveis, query, 'name');
+    return this.$filter('filter')(this.usuariosDisponiveis, query, 'nome');
   }
 }
