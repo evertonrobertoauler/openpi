@@ -1,0 +1,37 @@
+<md-content layout="column" layout-align="center center">
+  <h3>Tela Professor</h3>
+
+  <form name="aula" layout="column" layout-padding ng-cloak novalidate>
+    <div layout="row">
+      <md-input-container flex>
+        <label>Endereço para aula</label>
+        <input required ng-pattern="/^[0-9a-zA-Z\-]+$/" name="nome" ng-model="professor.aula.nome"/>
+
+        <div ng-messages="aula.nome.$error">
+          <div ng-message="required">Campo Obrigatório</div>
+          <div ng-message="pattern">Caractéres especiais ou espaços na permitidos.</div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <md-button class="md-primary md-raised">
+          Salvar
+        </md-button>
+      </md-input-container>
+      <md-input-container>
+        <md-button class="md-warn md-raised">
+          Excluir
+        </md-button>
+      </md-input-container>
+    </div>
+    <br />
+    <div>
+      <b>URL:</b> {{ 'https://openpi.firebaseapp.com/#/aula/' + (professor.aula.nome || 'endereco-para-aula') }}
+    </div>
+    <br />
+    <md-input-container>
+      <label>Pergunta</label>
+      <input ng-model="professor.aula.pergunta"/>
+    </md-input-container>
+  </form>
+
+</md-content>

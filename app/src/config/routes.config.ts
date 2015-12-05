@@ -9,43 +9,17 @@ export class RoutesConfig {
         url: '/login',
         template: '<login></login>'
       })
-      .state('inicio', {
-        url: '/inicio',
-        template: '<inicio></inicio>',
+      .state('professor', {
+        url: '/',
+        template: '<professor></professor>',
         resolve: {loginRequired}
       })
-      .state('perfil', {
-        url: '/perfil',
-        template: '<perfil></perfil>',
-        resolve: {loginRequired}
-      })
-      .state('turma-list', {
-        url: '/turma/list',
-        template: '<turma-list></turma-list>',
-        resolve: {loginRequired}
-      })
-      .state('turma-view', {
-        url: '/turma/view/:id',
-        template: '<turma-view></turma-view>',
-        resolve: {loginRequired}
-      })
-      .state('turma-form', {
-        url: '/turma/form/:id',
-        template: '<turma-form></turma-form>',
-        resolve: {loginRequired}
-      })
-      .state('questao-view', {
-        url: '/questao/view/:turma/:id',
-        template: '<questao-view></questao-view>',
-        resolve: {loginRequired}
-      })
-      .state('questao-form', {
-        url: '/questao/form/:turma/:id',
-        template: '<questao-form></questao-form>',
-        resolve: {loginRequired}
+      .state('aula', {
+        url: '/aula/:id',
+        template: '<aula></aula>'
       });
 
-    $urlRouterProvider.otherwise('/inicio');
+    $urlRouterProvider.otherwise('/');
   }
 }
 

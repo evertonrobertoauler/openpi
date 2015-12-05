@@ -1,16 +1,16 @@
 import {Usuario} from './../../common/services/usuario.service';
 
-export function perfil() {
+export function aula() {
   return {
     restrict: 'E',
-    template: require('./perfil.component.html'),
-    controller: PerfilComponent,
-    controllerAs: 'perfil',
+    template: require('./aula.component.html'),
+    controller: AulaComponent,
+    controllerAs: 'aula',
     bindToController: true
   };
 }
 
-class PerfilComponent {
+class AulaComponent {
   static $inject = ['Usuario'];
 
   constructor(public usuario: Usuario) {

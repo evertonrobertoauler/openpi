@@ -1,11 +1,13 @@
 import * as angular from 'angular';
 import * as ngMaterial from 'angular-material';
+import * as ngMessages from 'angular-messages';
 import * as angularfire from 'angularfire';
 import * as uiRouter from 'angular-ui-router';
 
 const ngModule = angular.module('openpi', [
   ngMaterial,
   angularfire,
+  ngMessages,
   uiRouter
 ]);
 
@@ -15,18 +17,12 @@ import {RoutesConfig, RoutesErrorConfig} from './config/routes.config';
 
 import {Firebase} from './common/services/firebase.service';
 import {Usuario} from './common/services/usuario.service';
-import {Turma} from './common/services/turma.service';
-import {Questao} from './common/services/questao.service';
+import {Aula} from './common/services/aula.service';
 
 import {app} from './components/app/app.component';
 import {login} from './components/login/login.component';
-import {inicio} from './components/inicio/inicio.component';
-import {perfil} from './components/perfil/perfil.component';
-import {turmaList} from './components/turmas/list/turma-list.component';
-import {turmaView} from './components/turmas/view/turma-view.component';
-import {turmaForm} from './components/turmas/form/turma-form.component';
-import {questaoView} from './components/questoes/view/questao-view.component';
-import {questaoForm} from './components/questoes/form/questao-form.component';
+import {professor} from './components/professor/professor.component';
+import {aula} from './components/aula/aula.component';
 
 ngModule
   .value('FIREBASE_URL', 'https://openpi.firebaseio.com/')
@@ -35,18 +31,12 @@ ngModule
 
   .service('Firebase', Firebase)
   .service('Usuario', Usuario)
-  .service('Turma', Turma)
-  .service('Questao', Questao)
+  .service('Aula', Aula)
 
   .directive('app', app)
   .directive('login', login)
-  .directive('inicio', inicio)
-  .directive('perfil', perfil)
-  .directive('turmaList', turmaList)
-  .directive('turmaView', turmaView)
-  .directive('turmaForm', turmaForm)
-  .directive('questaoView', questaoView)
-  .directive('questaoForm', questaoForm);
+  .directive('professor', professor)
+  .directive('aula', aula);
 
 const element = angular.element(document);
 
@@ -54,59 +44,26 @@ element.ready(() => {
   angular.bootstrap(element, [ngModule.name]);
 });
 
+
+//const model = {
+//  usuarios: {
+//    'google:103174776322595326817': {
+//      nome: 'Teste',
+//      foto: 'teste.jpg',
+//      id: 'google:103174776322595326817',
+//      aula: 'teste'
+//    }
+//  },
+//  aulas: {
+//    teste: {
+//      professor: 'google:103174776322595326817',
+//      pergunta: 'Are you sure?',
+//      respostas: {
+//        a: 'YES',
+//        b: 'NO'
+//      }
+//    }
+//  }
+//};
 //
-// menu
-//   app
-// usuario
-//   login
-//   perfil
-// aluno
-//   inicio
-// professor
-//   turmas
-//     list-turma
-//     form-turma
-//     view-turma
-//   questoes
-//     form-questao
-//     view-questao
-
-// const model = {
-//   turmas: {
-//     'google:103174776322595326817': {
-//       t1: {
-//         nome: 'Teste',
-//         alunos: {
-//           'google:103174776322595326817': false
-//         },
-//         questoes: {
-//           q1: true
-//         }
-//       }
-//     }
-//   },
-//   usuarios: {
-//     'google:103174776322595326817': {
-//       nome: 'Teste',
-//       turmas: {
-//         'google:103174776322595326817': {t1: true}
-//       }
-//     }
-//   },
-//   questoes: {
-//     q1: {
-//       turma: 't1',
-//       alunos: {
-//         'google:103174776322595326817': 'a'
-//       },
-//       texto: 'Are you sure?',
-//       respostas: {
-//         a: 'YES',
-//         b: 'NO'
-//       },
-//       resposta: 'a'
-//     }
-//   }
-// };
-
-// console.log(model);
+//console.log(model);

@@ -4,11 +4,8 @@ $fa-font-path: '../../node_modules/font-awesome/fonts' !default;
 @import '../../node_modules/font-awesome/scss/font-awesome.scss';
 @import 'components/app/app.component';
 @import 'components/login/login.component';
-@import 'components/turmas/form/turma-form.component';
-@import 'components/turmas/list/turma-list.component';
-@import 'components/turmas/view/turma-view.component';
-@import 'components/questoes/form/questao-form.component';
-@import 'components/questoes/view/questao-view.component';
+@import 'components/professor/professor.component';
+@import 'components/aula/aula.component';
 
 .center {
   text-align: center;

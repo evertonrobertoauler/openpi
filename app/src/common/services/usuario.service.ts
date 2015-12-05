@@ -4,7 +4,6 @@ export interface IPerfil extends AngularFireObject {
   id: string;
   nome: string;
   foto: string;
-  professor: boolean;
 }
 
 export class Usuario {
@@ -19,7 +18,7 @@ export class Usuario {
         this.authData = data;
         this.salvarPerfil();
         if ($state.is('login')) {
-          $state.go('inicio');
+          $state.go('professor');
         }
       }
     });
@@ -32,10 +31,6 @@ export class Usuario {
       this.setarDadosPerfil();
       return this.perfil.$save();
     });
-  }
-
-  obterUsuarios() {
-    return this.firebase.loadObject('/usuarios');
   }
 
   setarDadosPerfil() {
