@@ -1,4 +1,4 @@
-import {Usuario} from './../../common/services/usuario.service';
+import {Aula} from './../../common/services/aula.service';
 
 export function aula() {
   return {
@@ -11,8 +11,16 @@ export function aula() {
 }
 
 class AulaComponent {
-  static $inject = ['Usuario'];
+  static $inject = ['$stateParams', 'Aula'];
 
-  constructor(public usuario: Usuario) {
+  public aula: any;
+
+  constructor($stateParams, aulaService: Aula) {
+    aulaService
+      .obterAulaAluno($stateParams.hash)
+      .then(aula => {
+        console.log(aulaService.authData);
+        this.aula = aula;
+      });
   }
 }

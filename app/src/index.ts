@@ -19,6 +19,8 @@ import {Firebase} from './common/services/firebase.service';
 import {Usuario} from './common/services/usuario.service';
 import {Aula} from './common/services/aula.service';
 
+import {focusMe} from './common/directives/focus-me.directive';
+
 import {app} from './components/app/app.component';
 import {login} from './components/login/login.component';
 import {professor} from './components/professor/professor.component';
@@ -32,6 +34,8 @@ ngModule
   .service('Firebase', Firebase)
   .service('Usuario', Usuario)
   .service('Aula', Aula)
+
+  .directive('focusMe', focusMe)
 
   .directive('app', app)
   .directive('login', login)
@@ -51,17 +55,15 @@ element.ready(() => {
 //      nome: 'Teste',
 //      foto: 'teste.jpg',
 //      id: 'google:103174776322595326817',
-//      aula: 'teste'
+//      aula: 'hash'
 //    }
 //  },
 //  aulas: {
-//    teste: {
+//    hash: {
+//      hash: 'hash',
 //      professor: 'google:103174776322595326817',
 //      pergunta: 'Are you sure?',
-//      respostas: {
-//        a: 'YES',
-//        b: 'NO'
-//      }
+//      alternativas: ['YES', 'NO']
 //    }
 //  }
 //};

@@ -15,7 +15,7 @@ export class RoutesConfig {
         resolve: {loginRequired}
       })
       .state('aula', {
-        url: '/aula/:id',
+        url: '/aula/:hash',
         template: '<aula></aula>'
       });
 

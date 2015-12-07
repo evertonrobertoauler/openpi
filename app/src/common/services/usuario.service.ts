@@ -4,6 +4,7 @@ export interface IPerfil extends AngularFireObject {
   id: string;
   nome: string;
   foto: string;
+  aula: string;
 }
 
 export class Usuario {
@@ -12,16 +13,7 @@ export class Usuario {
   public perfil: IPerfil;
   public authData: any;
 
-  constructor(private firebase: Firebase, $state) {
-    this.firebase.auth.$onAuth((data) => {
-      if (data) {
-        this.authData = data;
-        this.salvarPerfil();
-        if ($state.is('login')) {
-          $state.go('professor');
-        }
-      }
-    });
+  constructor(private firebase: Firebase, private $state) {
   }
 
   salvarPerfil() {
@@ -66,7 +58,9 @@ export class Usuario {
   }
 
   login(provider) {
-    return this.firebase.auth.$authWithOAuthPopup(provider);
+    return this.firebase.auth
+      .$authWithOAuthPopup(provider)
+      .then(() => this.$state.go('professor'));
   }
 
   logout() {
@@ -81,8 +75,13 @@ loginRequired.$inject = ['Firebase', 'Usuario'];
 
 export function loginRequired(firebase: Firebase, usuario: Usuario) {
   return firebase.auth.$requireAuth().then(authData => {
-    usuario.authData = authData;
-    return authData;
+    console.log('loginRequired');
+    if (authData.provider !== 'anonymous') {
+      usuario.authData = authData;
+      return usuario.salvarPerfil();
+    } else {
+      throw new Error('Login required!');
+    }
   });
 }
 
