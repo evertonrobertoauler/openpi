@@ -1,5 +1,33 @@
-<md-content layout="column" layout-align="center center">
-  <h1>Aula</h1>
-  {{ aula.aula | json }}
+<md-content class="center">
+
+  <h3 ng-if="aula.disponivel === false">
+    Aula não disponível!
+  </h3>
+
+  <div layout="column" ng-if="aula.aula.status !== undefined">
+    <h1>Aula</h1>
+
+      <div layout="row" layout-align="center center">
+        <img ng-src="{{ aula.aula.professor.foto }}" class="foto">
+        <div>
+          <b>Professor(a)</b> {{ aula.aula.professor.nome }}
+        </div>
+      </div>
+
+    <h4 ng-show="aula.aula.status !== aula.status.INICIADA">
+      Nenhuma avaliação disponível no momento!
+    </h4>
+
+    <div ng-show="aula.aula.status === aula.status.INICIADA" layout="column">
+      <h3>{{ aula.aula.pergunta || 'Responda' }}</h3>
+      <md-radio-group ng-model="aula.resposta.alternativa" ng-change="aula.responder()">
+        <md-radio-button ng-repeat="alternativa in aula.aula.alternativas track by $index"
+                         ng-value="$index"
+                         class="md-primary left">
+          {{ alternativa }}
+        </md-radio-button>
+      </md-radio-group>
+    </div>
+  </div>
 </md-content>
 

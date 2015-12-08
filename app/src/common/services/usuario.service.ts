@@ -75,7 +75,6 @@ loginRequired.$inject = ['Firebase', 'Usuario'];
 
 export function loginRequired(firebase: Firebase, usuario: Usuario) {
   return firebase.auth.$requireAuth().then(authData => {
-    console.log('loginRequired');
     if (authData.provider !== 'anonymous') {
       usuario.authData = authData;
       return usuario.salvarPerfil();

@@ -1,10 +1,9 @@
 <md-content layout="column">
-  <h3 class="center">Aula - Tela professor</h3>
+  <h3 class="center">Tela do professor</h3>
 
   <form name="aula" layout="column" layout-padding ng-cloak novalidate>
     <div class="center">
-      <b>Endereço:</b>
-      <a ui-sref="aula(professor.aula)">{{ professor.url }}</a>
+      <b>Endereço:</b>{{ professor.url }}
       <md-button class="md-icon-button md-accent"
                  ng-click="professor.gerarNovoHash()"
                  ng-hide="professor.aula.status !== professor.status.PARADA">

@@ -1,5 +1,5 @@
 import {Usuario} from './../../common/services/usuario.service';
-import {IAula, StatusVotacao, Aula} from './../../common/services/aula.service';
+import {IAula, StatusAvaliacao, Aula} from './../../common/services/aula.service';
 
 export function professor() {
   return {
@@ -16,7 +16,7 @@ class ProfessorComponent {
 
   public aula: IAula;
 
-  public status = StatusVotacao;
+  public status = StatusAvaliacao;
 
   constructor(private $scope, private $timeout, public usuarioService: Usuario, public aulaService: Aula) {
     if (this.usuarioService.perfil.aula) {
@@ -27,7 +27,8 @@ class ProfessorComponent {
   }
 
   get url() {
-    return this.aula && this.aula.hash ? 'https://openpi.firebaseapp.com/#/aula/' + this.aula.hash : '';
+    const aula = this.aula && this.aula.professor && this.aula.professor.aula;
+    return aula ? 'https://openpi.firebaseapp.com/#/aula/' + aula : '';
   }
 
   gerarNovoHash() {
@@ -36,10 +37,12 @@ class ProfessorComponent {
     return this.aulaService
       .obterHashDisponivel()
       .then(hash => {
+        this.usuarioService.perfil.aula = hash;
+        this.usuarioService.perfil.$save();
+
         this.aula = this.aulaService.obterAula(hash);
         this.aula.status = this.status.PARADA;
-        this.aula.hash = hash;
-        this.aula.professor = this.usuarioService.perfil.id;
+        this.aula.professor = this.usuarioService.perfil;
 
         if (backup) {
           this.aula.pergunta = backup.pergunta || '';
@@ -48,9 +51,6 @@ class ProfessorComponent {
         }
 
         this.aula.$save();
-
-        this.usuarioService.perfil.aula = hash;
-        this.usuarioService.perfil.$save();
       });
   }
 
@@ -64,9 +64,7 @@ class ProfessorComponent {
     if (alternativa) {
       this.aula.alternativas = (this.aula.alternativas || []).concat([alternativa]);
       this.aula.$save();
-      this.$timeout(() => {
-        this.$scope.$broadcast(`alternativa-${this.aula.alternativas.length - 1}-focus`);
-      }, 50);
+      this.$timeout(() => this.$scope.$broadcast(`alternativa-${this.aula.alternativas.length - 1}-focus`), 50);
     }
   }
 
@@ -82,6 +80,10 @@ class ProfessorComponent {
   }
 
   iniciar() {
+    if (this.aula.status === this.status.PARADA) {
+      this.aula.respostas = null;
+    }
+
     this.aula.status = this.status.INICIADA;
     this.aula.$save();
   }
