@@ -12,13 +12,13 @@ export function professor() {
 }
 
 class ProfessorComponent {
-  static $inject = ['$scope', 'Usuario', 'Aula'];
+  static $inject = ['$scope', '$timeout', 'Usuario', 'Aula'];
 
   public aula: IAula;
 
   public status = StatusVotacao;
 
-  constructor(private $scope, public usuarioService: Usuario, public aulaService: Aula) {
+  constructor(private $scope, private $timeout, public usuarioService: Usuario, public aulaService: Aula) {
     if (this.usuarioService.perfil.aula) {
       this.aula = this.aulaService.obterAula(this.usuarioService.perfil.aula);
     } else {
@@ -27,15 +27,11 @@ class ProfessorComponent {
   }
 
   get url() {
-    return this.aula ? 'https://openpi.firebaseapp.com/#/aula/' + this.aula.hash : '';
+    return this.aula && this.aula.hash ? 'https://openpi.firebaseapp.com/#/aula/' + this.aula.hash : '';
   }
 
   gerarNovoHash() {
-    if (this.aula) {
-      this.aula.$remove();
-      this.usuarioService.perfil.aula = null;
-      this.usuarioService.perfil.$save();
-    }
+    let backup = this.aula;
 
     return this.aulaService
       .obterHashDisponivel()
@@ -44,6 +40,13 @@ class ProfessorComponent {
         this.aula.status = this.status.PARADA;
         this.aula.hash = hash;
         this.aula.professor = this.usuarioService.perfil.id;
+
+        if (backup) {
+          this.aula.pergunta = backup.pergunta || '';
+          this.aula.alternativas = backup.alternativas || [];
+          backup.$remove();
+        }
+
         this.aula.$save();
 
         this.usuarioService.perfil.aula = hash;
@@ -61,7 +64,9 @@ class ProfessorComponent {
     if (alternativa) {
       this.aula.alternativas = (this.aula.alternativas || []).concat([alternativa]);
       this.aula.$save();
-      this.$scope.$broadcast('nova-alternativa-focus');
+      this.$timeout(() => {
+        this.$scope.$broadcast(`alternativa-${this.aula.alternativas.length - 1}-focus`);
+      }, 50);
     }
   }
 

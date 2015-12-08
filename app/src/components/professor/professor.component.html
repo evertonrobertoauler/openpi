@@ -5,9 +5,17 @@
     <div class="center">
       <b>Endereço:</b>
       <a ui-sref="aula(professor.aula)">{{ professor.url }}</a>
-      <md-button class="md-icon-button" ng-click="professor.gerarNovoHash()">
+      <md-button class="md-icon-button md-accent"
+                 ng-click="professor.gerarNovoHash()"
+                 ng-hide="professor.aula.status !== professor.status.PARADA">
         <md-tooltip>Gerar um novo endereço</md-tooltip>
         <md-icon md-font-icon="fa-refresh" class="fa fa-2x"></md-icon>
+      </md-button>
+      <md-button class="md-icon-button md-warn"
+                 ng-click="professor.limpar()"
+                 ng-hide="professor.aula.status !== professor.status.PARADA">
+        <md-tooltip>Limpar todos os campos</md-tooltip>
+        <md-icon md-font-icon="fa-paint-brush" class="fa fa-2x"></md-icon>
       </md-button>
     </div>
     <md-input-container>
@@ -22,36 +30,31 @@
       <label>{{ $index + 1 }})</label>
       <textarea ng-model="alternativa"
                 ng-change="professor.editarAlternativa($index, alternativa)"
-                ng-disabled="professor.aula.status !== professor.status.PARADA">
+                ng-disabled="professor.aula.status !== professor.status.PARADA"
+                focus-me="{{ 'alternativa-' + $index + '-focus' }}">
       </textarea>
     </md-input-container>
     <md-input-container ng-hide="professor.aula.status !== professor.status.PARADA">
       <label>Nova alternativa</label>
       <textarea focus-me="nova-alternativa-focus"
                 ng-model="alternativa"
-                ng-blur="professor.adicionarAlternativa(alternativa); alternativa = ''">
+                ng-change="professor.adicionarAlternativa(alternativa); alternativa = ''">
       </textarea>
     </md-input-container>
-    <md-input-container ng-hide="professor.aula.status !== professor.status.PARADA">
-      <md-button ng-click="professor.limpar()" class="md-raised md-warn">
-        <md-tooltip>Limpar todos os campos</md-tooltip>
-        Limpar
-      </md-button>
-    </md-input-container>
     <div layout="row" layout-align="center center" ng-show="professor.aula.alternativas.length > 1">
-      <md-button class="md-icon-button"
+      <md-button class="md-icon-button md-primary"
                  ng-click="professor.iniciar()"
                  ng-show="professor.aula.status !== professor.status.INICIADA">
         <md-tooltip>Iniciar</md-tooltip>
         <md-icon md-font-icon="fa-play" class="fa fa-2x"></md-icon>
       </md-button>
-      <md-button class="md-icon-button"
+      <md-button class="md-icon-button md-accent"
                  ng-click="professor.pausar()"
                  ng-show="professor.aula.status === professor.status.INICIADA">
         <md-tooltip>Pausar</md-tooltip>
         <md-icon md-font-icon="fa-pause" class="fa fa-2x"></md-icon>
       </md-button>
-      <md-button class="md-icon-button"
+      <md-button class="md-icon-button md-warn"
                  ng-click="professor.parar()"
                  ng-show="professor.aula.status !== professor.status.PARADA">
         <md-tooltip>Parar</md-tooltip>

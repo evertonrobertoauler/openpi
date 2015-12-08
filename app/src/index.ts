@@ -14,6 +14,7 @@ const ngModule = angular.module('openpi', [
 import './index.css';
 
 import {RoutesConfig, RoutesErrorConfig} from './config/routes.config';
+import {ThemingConfig} from './config/theme.config';
 
 import {Firebase} from './common/services/firebase.service';
 import {Usuario} from './common/services/usuario.service';
@@ -28,7 +29,10 @@ import {aula} from './components/aula/aula.component';
 
 ngModule
   .value('FIREBASE_URL', 'https://openpi.firebaseio.com/')
+
   .config(RoutesConfig)
+  .config(ThemingConfig)
+
   .run(RoutesErrorConfig)
 
   .service('Firebase', Firebase)
