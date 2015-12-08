@@ -1,5 +1,5 @@
-<md-content layout="column" flex layout-fill ng-cloak class="main-content">
-  <md-toolbar md-scroll-shrink>
+<md-content layout="column" class="main-content">
+  <md-toolbar>
     <div class="md-toolbar-tools">
       <h2 flex>Open peer instruction</h2>
       <span ng-show="app.usuario.perfil" layout="row">
@@ -14,7 +14,5 @@
       </span>
     </div>
   </md-toolbar>
-  <md-content class="view-content">
-    <div ui-view></div>
-  </md-content>
+  <md-content ui-view></md-content>
 </md-content>
