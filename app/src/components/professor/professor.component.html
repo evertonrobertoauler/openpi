@@ -70,11 +70,10 @@
       <p class="center">
         <ng-pluralize class="center"
                       count="professor.resultado.qtAlunos"
-                      when="{'0': 'Ninguém está conectado',
-                             'one': '1 aluno conectado',
-                             'other': '{} alunos conectados'}">
+                      when="{'0': 'Ninguém está conectado e ',
+                             'one': '1 aluno conectado e ',
+                             'other': '{} alunos conectados e '}">
         </ng-pluralize>
-        e
         <ng-pluralize class="center"
                       count="professor.resultado.qtRespostas"
                       when="{'0': 'ainda ninguém respondeu.',
