@@ -60,8 +60,30 @@
         <md-icon md-font-icon="fa-stop" class="fa fa-2x"></md-icon>
       </md-button>
     </div>
-    <div ng-show="professor.resultado">
+    <div ng-if="professor.resultado">
       <h3 class="center">Resultados</h3>
+
+      <md-progress-linear md-mode="determinate"
+                          ng-value="professor.resultado.prRespostas">
+      </md-progress-linear>
+
+      <p class="center">
+        <ng-pluralize class="center"
+                      count="professor.resultado.qtAlunos"
+                      when="{'0': 'Ninguém está conectado',
+                             'one': '1 aluno conectado',
+                             'other': '{} alunos conectados'}">
+        </ng-pluralize>
+        e
+        <ng-pluralize class="center"
+                      count="professor.resultado.qtRespostas"
+                      when="{'0': 'ainda ninguém respondeu.',
+                             'one': '1 aluno respondeu.',
+                             'other': '{} alunos responderam.'}">
+        </ng-pluralize>
+      </p>
+
+      <div google-chart chart="professor.resultado.chart" style="height:300px; width:100%;"></div>
     </div>
   </form>
 </md-content>

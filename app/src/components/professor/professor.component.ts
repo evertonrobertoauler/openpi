@@ -1,5 +1,6 @@
 import {Usuario} from './../../common/services/usuario.service';
 import {IAula, StatusAvaliacao, Aula} from './../../common/services/aula.service';
+import * as _ from 'lodash';
 
 export function professor() {
   return {
@@ -15,12 +16,14 @@ class ProfessorComponent {
   static $inject = ['$scope', '$timeout', 'Usuario', 'Aula'];
 
   public aula: IAula;
+  public resultado;
 
   public status = StatusAvaliacao;
 
   constructor(private $scope, private $timeout, public usuarioService: Usuario, public aulaService: Aula) {
     if (this.usuarioService.perfil.aula) {
       this.aula = this.aulaService.obterAula(this.usuarioService.perfil.aula);
+      this.aula.$watch(() => this.calcularResultado());
     } else {
       this.gerarNovoHash();
     }
@@ -51,6 +54,7 @@ class ProfessorComponent {
         }
 
         this.aula.$save();
+        this.aula.$watch(() => this.calcularResultado());
       });
   }
 
@@ -80,10 +84,6 @@ class ProfessorComponent {
   }
 
   iniciar() {
-    if (this.aula.status === this.status.PARADA) {
-      this.aula.respostas = null;
-    }
-
     this.aula.status = this.status.INICIADA;
     this.aula.$save();
   }
@@ -95,6 +95,44 @@ class ProfessorComponent {
 
   parar() {
     this.aula.status = this.status.PARADA;
+    this.aula.respostas = null;
     this.aula.$save();
+  }
+
+  calcularResultado() {
+    if (this.aula.status !== this.status.PARADA) {
+
+      let totais = this.aula.alternativas.map(() => 0);
+      let qtRespostas = 0;
+      let qtAlunos = Object.keys(this.aula.respostas || {}).length;
+
+      _.forEach(this.aula.respostas, (resposta: any) => {
+        if (resposta.alternativa !== -1) {
+          qtRespostas++;
+          totais[resposta.alternativa]++;
+        }
+      });
+
+      const rows = this.aula.alternativas.map((a, i) => {
+        return {c: [{v: `${i + 1}) ${a}`}, {v: totais[i]}]};
+      });
+
+      this.resultado = {
+        qtRespostas,
+        qtAlunos,
+        prRespostas: (qtRespostas / qtAlunos) * 100,
+        chart: {
+          type: 'PieChart',
+          title: 'Resultado',
+          data: {
+            cols: [
+              {id: 't', label: 'Alternativa', type: 'string'},
+              {id: 's', label: 'Resultado', type: 'number'}
+            ],
+            rows
+          }
+        }
+      };
+    }
   }
 }

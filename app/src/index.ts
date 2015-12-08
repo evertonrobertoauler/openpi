@@ -3,12 +3,14 @@ import * as ngMaterial from 'angular-material';
 import * as ngMessages from 'angular-messages';
 import * as angularfire from 'angularfire';
 import * as uiRouter from 'angular-ui-router';
+import 'angular-google-chart';
 
 const ngModule = angular.module('openpi', [
   ngMaterial,
   angularfire,
   ngMessages,
-  uiRouter
+  uiRouter,
+  'googlechart'
 ]);
 
 import './index.css';
