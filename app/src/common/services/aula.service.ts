@@ -1,8 +1,9 @@
 import {Firebase} from './firebase.service';
-import {Usuario, IPerfil} from './usuario.service';
+import {IPerfil} from './usuario.service';
 import * as _ from 'lodash';
 
 export interface IAula extends AngularFireObject {
+  url: string;
   professor: IPerfil;
   pergunta: string;
   alternativas: string[];
@@ -17,11 +18,11 @@ export enum StatusAvaliacao {
 }
 
 export class Aula {
-  static $inject = ['$q', 'Firebase', 'Usuario'];
+  static $inject = ['$q', 'Firebase'];
 
   public authData: any;
 
-  constructor(private $q, private firebase: Firebase, private usuario: Usuario) {
+  constructor(private $q, private firebase: Firebase) {
   }
 
   obterAulaAluno(hash: string) {

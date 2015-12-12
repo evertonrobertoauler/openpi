@@ -1,9 +1,9 @@
-<md-content layout="column">
+<md-content layout="column" flex flex-offset-gt-sm="20" flex-gt-sm="60">
   <h3 class="center">Tela do professor</h3>
 
   <form name="aula" layout="column" layout-padding ng-cloak novalidate>
     <div class="center">
-      <b>Endereço:</b>{{ professor.url }}
+      <b>Endereço:</b>&nbsp;{{ professor.aula.url }}
       <md-button class="md-icon-button md-accent"
                  ng-click="professor.gerarNovoHash()"
                  ng-hide="professor.aula.status !== professor.status.PARADA">

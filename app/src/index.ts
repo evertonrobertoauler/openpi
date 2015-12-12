@@ -21,6 +21,7 @@ import {ThemingConfig} from './config/theme.config';
 import {Firebase} from './common/services/firebase.service';
 import {Usuario} from './common/services/usuario.service';
 import {Aula} from './common/services/aula.service';
+import {Url} from './common/services/url.service';
 
 import {focusMe} from './common/directives/focus-me.directive';
 
@@ -31,6 +32,7 @@ import {aula} from './components/aula/aula.component';
 
 ngModule
   .value('FIREBASE_URL', 'https://openpi.firebaseio.com/')
+  .value('GOOGLE_API_KEY', 'AIzaSyDwWOOWP2SLY6SO2RYJOTLohhpQqStQm50')
 
   .config(RoutesConfig)
   .config(ThemingConfig)
@@ -40,6 +42,7 @@ ngModule
   .service('Firebase', Firebase)
   .service('Usuario', Usuario)
   .service('Aula', Aula)
+  .service('Url', Url)
 
   .directive('focusMe', focusMe)
 
