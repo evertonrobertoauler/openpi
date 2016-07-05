@@ -6,34 +6,37 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "angular-material/angular-material.d.ts": {
-      "commit": "421d6610bdb09e1015b71f5991d7a68d079eca21"
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
     },
     "jquery/jquery.d.ts": {
-      "commit": "efd40e67ff323f7147651bdbef03c03ead7b1675"
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
     },
     "firebase/firebase.d.ts": {
-      "commit": "421d6610bdb09e1015b71f5991d7a68d079eca21"
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
     },
     "angularfire/angularfire.d.ts": {
-      "commit": "421d6610bdb09e1015b71f5991d7a68d079eca21"
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
     },
     "angularjs/angular.d.ts": {
-      "commit": "efd40e67ff323f7147651bdbef03c03ead7b1675"
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
     },
     "moment/moment-node.d.ts": {
-      "commit": "efd40e67ff323f7147651bdbef03c03ead7b1675"
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
     },
     "moment/moment.d.ts": {
-      "commit": "efd40e67ff323f7147651bdbef03c03ead7b1675"
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
     },
     "angularjs/angular-animate.d.ts": {
-      "commit": "efd40e67ff323f7147651bdbef03c03ead7b1675"
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
     },
     "angular-ui-router/angular-ui-router.d.ts": {
-      "commit": "efd40e67ff323f7147651bdbef03c03ead7b1675"
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
     },
     "lodash/lodash.d.ts": {
-      "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
+    },
+    "es6-shim/es6-shim.d.ts": {
+      "commit": "42335c83eda05c7d7c007788629aa58d3b008fca"
     }
   }
 }

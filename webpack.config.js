@@ -27,14 +27,13 @@ module.exports = {
     extensions: ['', '.ts', '.js']
   },
   output: {
-    path: path.join(__dirname, 'app', 'www'),
-    filename: 'bundle.js',
-    publicPath: 'www/'
+    path: path.join(__dirname, 'public', 'dist'),
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
       {test: /\.ts$/, loader: 'ts-loader!tslint', exclude: /node_modules/},
-      {test: /\.css/, loader: defineObj.ON_PRODUCTION ? "style!css?minimize" : "style!css"},
+      {test: /\.scss/, loader: defineObj.ON_PRODUCTION ? "style!css?minimize!sass" : "style!css!sass"},
       {test: /\.html/, loader: "html"},
       {test: /\.png/, loader: "file?name=img/[name].[ext]"},
       {test: /\.(woff|ttf|eot|svg)/, loader: 'file?name=fonts/[name].[ext]'}

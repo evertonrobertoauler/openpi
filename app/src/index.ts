@@ -2,18 +2,18 @@ import * as angular from 'angular';
 import * as ngMaterial from 'angular-material';
 import * as ngMessages from 'angular-messages';
 import * as angularfire from 'angularfire';
-import * as uiRouter from 'angular-ui-router';
+import 'angular-ui-router';
 import 'angular-google-chart';
 
 const ngModule = angular.module('openpi', [
   ngMaterial,
   angularfire,
   ngMessages,
-  uiRouter,
+  'ui.router',
   'googlechart'
 ]);
 
-import './index.css';
+import './index.scss';
 
 import {RoutesConfig, RoutesErrorConfig} from './config/routes.config';
 import {ThemingConfig} from './config/theme.config';

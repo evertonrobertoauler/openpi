@@ -1,8 +1,3 @@
-declare module "angular-material" {
-  var ngMaterial:string;
-  export = ngMaterial;
-}
-
 declare module "angular-messages" {
   var ngMessages:string;
   export = ngMessages;

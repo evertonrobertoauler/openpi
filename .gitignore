@@ -1,5 +1,4 @@
 node_modules
 typings
 .idea
-app/www
-*.css
+public/dist

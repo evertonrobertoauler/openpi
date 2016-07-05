@@ -4,9 +4,10 @@
   "description": "Open peer instruction implementation",
   "main": "index.js",
   "scripts": {
-    "build": "gulp sass && NODE_ENV=production webpack --colors",
-    "serve": "live-server --ignore=src app & gulp watch & webpack --colors --watch",
-    "install": "tsd install && gulp fix-webpack"
+    "start": "webpack --colors --watch & npm run server",
+    "postinstall": "tsd install",
+    "build": "NODE_ENV=production webpack --colors",
+    "server": "live-server public --port=3000 --host=localhost"
   },
   "author": "Éverton Roberto Auler",
   "license": "ISC",
@@ -16,31 +17,30 @@
     "Peer instruction"
   ],
   "dependencies": {
-    "angular": "^1.4.8",
-    "angular-animate": "^1.4.8",
-    "angular-aria": "^1.4.8",
+    "angular": "^1.5.7",
+    "angular-animate": "^1.5.7",
+    "angular-aria": "^1.5.7",
     "angular-google-chart": "^0.1.0",
-    "angular-material": "^0.11.4",
-    "angular-messages": "^1.4.8",
-    "angular-ui-router": "^0.2.15",
-    "angularfire": "^1.1.3",
-    "firebase": "^2.3.2",
-    "font-awesome": "^4.5.0",
-    "lodash": "^3.10.1"
+    "angular-material": "^1.1.0-rc.5",
+    "angular-messages": "^1.5.7",
+    "angular-ui-router": "^0.3.1",
+    "angularfire": "^2.0.1",
+    "firebase": "^3.1.0",
+    "font-awesome": "^4.6.3",
+    "lodash": "^4.13.1"
   },
   "devDependencies": {
-    "css-loader": "^0.23.0",
-    "file-loader": "^0.8.5",
-    "gulp": "^3.9.0",
-    "gulp-replace": "^0.5.4",
-    "gulp-sass": "^2.1.0",
-    "html-loader": "^0.4.0",
-    "live-server": "^0.8.2",
-    "style-loader": "^0.13.0",
-    "ts-loader": "^0.7.2",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.9.0",
+    "html-loader": "^0.4.3",
+    "live-server": "^1.0.0",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^0.8.2",
     "tsd": "^0.6.5",
-    "tslint-loader": "^2.1.0",
-    "typescript": "^1.7.3",
-    "webpack": "^1.12.9"
+    "tslint": "^3.13.0",
+    "tslint-loader": "^2.1.5",
+    "typescript": "^1.8.10",
+    "webpack": "^1.13.1"
   }
 }
