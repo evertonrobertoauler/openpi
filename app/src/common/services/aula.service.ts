@@ -28,7 +28,7 @@ export class Aula {
   obterAulaAluno(hash: string) {
     let auth = this.firebase.auth.$getAuth()
       ? this.$q.when(this.firebase.auth.$getAuth())
-      : this.firebase.auth.$authAnonymously();
+      : this.firebase.auth.$signInAnonymously();
 
     return auth
       .then(authData => {

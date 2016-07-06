@@ -36,36 +36,25 @@ export class Usuario {
   }
 
   get nome() {
-    if (this.authData) {
-      if (this.authData.facebook) {
-        return this.authData.facebook.displayName;
-      }
-      if (this.authData.google) {
-        return this.authData.google.displayName;
-      }
-    }
+    return this.authData && this.authData.displayName;
   }
 
   get foto() {
-    if (this.authData) {
-      if (this.authData.facebook) {
-        return this.authData.facebook.profileImageURL;
-      }
-      if (this.authData.google) {
-        return this.authData.google.profileImageURL;
-      }
-    }
+    return this.authData && this.authData.photoURL;
   }
 
   login(provider) {
     return this.firebase.auth
-      .$authWithOAuthPopup(provider)
-      .then(() => this.$state.go('professor'));
+      .$signInWithPopup(provider)
+      .then(() => this.$state.go('professor'))
+      .catch(function (error) {
+        console.error('Authentication failed:', error);
+      });
   }
 
   logout() {
     this.firebase.unload();
-    this.firebase.auth.$unauth();
+    this.firebase.auth.$signOut();
     this.authData = null;
     this.perfil = null;
   }
@@ -74,7 +63,7 @@ export class Usuario {
 loginRequired.$inject = ['Firebase', 'Usuario'];
 
 export function loginRequired(firebase: Firebase, usuario: Usuario) {
-  return firebase.auth.$requireAuth().then(authData => {
+  return firebase.auth.$requireSignIn().then(authData => {
     if (authData.provider !== 'anonymous') {
       usuario.authData = authData;
       return usuario.salvarPerfil();

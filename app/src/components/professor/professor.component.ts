@@ -14,14 +14,14 @@ export function professor() {
 }
 
 class ProfessorComponent {
-  static $inject = ['$scope', '$timeout', 'Usuario', 'Aula', 'Url'];
+  static $inject = ['$scope', '$window', '$timeout', 'Usuario', 'Aula', 'Url'];
 
   public aula: IAula;
   public resultado;
 
   public status = StatusAvaliacao;
 
-  constructor(private $scope, private $timeout, public usuarioService: Usuario,
+  constructor(private $scope, private $window, private $timeout, public usuarioService: Usuario,
               public aulaService: Aula, private urlService: Url) {
     if (this.usuarioService.perfil.aula) {
       this.aula = this.aulaService.obterAula(this.usuarioService.perfil.aula);
@@ -44,7 +44,7 @@ class ProfessorComponent {
         this.aula.status = this.status.PARADA;
         this.aula.professor = this.usuarioService.perfil;
 
-        const longUrl = 'https://openpi.firebaseapp.com/#/aula/' + hash;
+        const longUrl = `${this.$window.location.origin}/#/aula/${hash}`;
 
         this.urlService.gerarShortUrl(longUrl).then(res => {
           this.aula.url = (res.result.id || '').replace('https://', '');

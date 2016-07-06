@@ -31,7 +31,12 @@ import {professor} from './components/professor/professor.component';
 import {aula} from './components/aula/aula.component';
 
 ngModule
-  .value('FIREBASE_URL', 'https://openpi.firebaseio.com/')
+  .value('FIREBASE_CONFIG', {
+    apiKey: 'AIzaSyCqTDpKf7InJ-SZBSzSshzkyYoVU9Kg_Pk',
+    authDomain: 'open-peer-instruction.firebaseapp.com',
+    databaseURL: 'https://open-peer-instruction.firebaseio.com',
+    storageBucket: 'open-peer-instruction.appspot.com'
+  })
   .value('GOOGLE_API_KEY', 'AIzaSyDwWOOWP2SLY6SO2RYJOTLohhpQqStQm50')
 
   .config(RoutesConfig)
