@@ -4,12 +4,12 @@
       <h2 flex>Open peer instruction</h2>
       <span ng-show="app.usuario.perfil" layout="row">
         <md-button ui-sref="professor" class="md-icon-button">
-          <md-tooltip>{{ app.usuario.perfil.nome }}</md-tooltip>
+          <md-tooltip>{{ app.usuario.perfil.nome || 'Professor'}}</md-tooltip>
           <img ng-src="{{ app.usuario.perfil.foto }}">
         </md-button>
-        <md-button class="md-icon-button" ui-sref="login" aria-label="Sair">
+        <md-button class="md-icon-button" ui-sref="login">
           <md-tooltip>Sair</md-tooltip>
-          <md-icon md-font-icon="fa-sign-out" class="fa fa-2x"></md-icon>
+          <md-icon md-font-icon="fa-sign-out" class="fa"></md-icon>
         </md-button>
       </span>
     </div>

@@ -1,9 +1,9 @@
 
 export class Url {
-  static $inject = ['$window', 'GOOGLE_API_KEY'];
+  static $inject = ['$window', 'FIREBASE_CONFIG'];
 
-  constructor(private $window, GOOGLE_API_KEY) {
-    this.$window.gapi.client.setApiKey(GOOGLE_API_KEY);
+  constructor(private $window, FIREBASE_CONFIG) {
+    this.$window.gapi.client.setApiKey(FIREBASE_CONFIG.apiKey);
   }
 
   gerarShortUrl(longUrl) {

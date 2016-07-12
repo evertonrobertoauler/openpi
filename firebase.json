@@ -1,10 +1,14 @@
 {
-  "firebase": "openpi",
-  "public": "app",
-  "ignore": [
-    "firebase.json",
-    "**/.*",
-    "**/node_modules/**",
-    "**/src/**"
-  ]
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "public": "public",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }

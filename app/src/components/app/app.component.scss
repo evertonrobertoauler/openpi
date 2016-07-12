@@ -4,9 +4,17 @@
       min-width: 0;
     }
 
-    img {
-      width: $toolbar-height-mobile-landscape;
-      height: $toolbar-height-mobile-landscape;
+    a.md-icon-button {
+      .fa {
+        font-size: 35px;
+      }
+      img {
+        position: relative;
+        top: -8px;
+        left: -8px;
+        width: $toolbar-height-mobile-landscape - 5px;
+        height: $toolbar-height-mobile-landscape - 5px;
+      }
     }
   }
 }

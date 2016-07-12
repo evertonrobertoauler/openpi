@@ -37,7 +37,6 @@ ngModule
     databaseURL: 'https://open-peer-instruction.firebaseio.com',
     storageBucket: 'open-peer-instruction.appspot.com'
   })
-  .value('GOOGLE_API_KEY', 'AIzaSyDwWOOWP2SLY6SO2RYJOTLohhpQqStQm50')
 
   .config(RoutesConfig)
   .config(ThemingConfig)
