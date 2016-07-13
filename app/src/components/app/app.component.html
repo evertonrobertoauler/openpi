@@ -1,15 +1,19 @@
 <md-content layout="column" class="main-content">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h2 flex>Open peer instruction</h2>
-      <span ng-show="app.usuario.perfil" layout="row">
+      <h2 flex><a ui-sref="professor">Open peer instruction</a></h2>
+      <span ng-show="$ctrl.usuario.perfil" layout="row">
+        <md-button class="md-icon-button" ui-sref="questoes">
+          <md-tooltip>Banco de questões</md-tooltip>
+          <md-icon md-font-icon="fa-list-alt" class="fa" style="font-size: 27px"></md-icon>
+        </md-button>
         <md-button ui-sref="professor" class="md-icon-button">
-          <md-tooltip>{{ app.usuario.perfil.nome || 'Professor'}}</md-tooltip>
-          <img ng-src="{{ app.usuario.perfil.foto }}">
+          <md-tooltip>{{ $ctrl.usuario.perfil.nome || 'Professor'}}</md-tooltip>
+          <img ng-src="{{ $ctrl.usuario.perfil.foto }}">
         </md-button>
         <md-button class="md-icon-button" ui-sref="login">
           <md-tooltip>Sair</md-tooltip>
-          <md-icon md-font-icon="fa-sign-out" class="fa"></md-icon>
+          <md-icon md-font-icon="fa-sign-out" class="fa" style="font-size: 33px"></md-icon>
         </md-button>
       </span>
     </div>

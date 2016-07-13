@@ -1,12 +1,9 @@
 import {Aula, StatusAvaliacao} from './../../common/services/aula.service';
 
-export function aula() {
+export function aula(): ng.IComponentOptions {
   return {
-    restrict: 'E',
     template: require('./aula.component.html'),
-    controller: AulaComponent,
-    controllerAs: 'aula',
-    bindToController: true
+    controller: AulaComponent
   };
 }
 

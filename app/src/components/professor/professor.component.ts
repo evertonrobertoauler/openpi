@@ -3,13 +3,10 @@ import {IAula, StatusAvaliacao, Aula} from './../../common/services/aula.service
 import {Url} from './../../common/services/url.service';
 import * as _ from 'lodash';
 
-export function professor() {
+export function professor(): ng.IComponentOptions {
   return {
-    restrict: 'E',
     template: require('./professor.component.html'),
-    controller: ProfessorComponent,
-    controllerAs: 'professor',
-    bindToController: true
+    controller: ProfessorComponent
   };
 }
 

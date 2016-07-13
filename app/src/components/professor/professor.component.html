@@ -3,86 +3,86 @@
 
   <form name="aula" layout="column" layout-padding ng-cloak novalidate>
     <div class="center">
-      <b>Endereço:</b>&nbsp;{{ professor.aula.url }}
+      <b>Endereço:</b>&nbsp;{{ $ctrl.aula.url }}
       <md-button class="md-icon-button md-accent"
-                 ng-click="professor.gerarNovoHash()"
-                 ng-hide="professor.aula.status !== professor.status.PARADA">
+                 ng-click="$ctrl.gerarNovoHash()"
+                 ng-hide="$ctrl.aula.status !== $ctrl.status.PARADA">
         <md-tooltip>Gerar um novo endereço</md-tooltip>
         <md-icon md-font-icon="fa-refresh" class="fa fa-2x"></md-icon>
       </md-button>
       <md-button class="md-icon-button md-warn"
-                 ng-click="professor.limpar()"
-                 ng-hide="professor.aula.status !== professor.status.PARADA">
+                 ng-click="$ctrl.limpar()"
+                 ng-hide="$ctrl.aula.status !== $ctrl.status.PARADA">
         <md-tooltip>Limpar todos os campos</md-tooltip>
         <md-icon md-font-icon="fa-paint-brush" class="fa fa-2x"></md-icon>
       </md-button>
     </div>
     <md-input-container>
       <label>Pergunta</label>
-      <textarea ng-model="professor.aula.pergunta"
-                ng-change="professor.aula.$save()"
-                ng-disabled="professor.aula.status !== professor.status.PARADA">
+      <textarea ng-model="$ctrl.aula.pergunta"
+                ng-change="$ctrl.aula.$save()"
+                ng-disabled="$ctrl.aula.status !== $ctrl.status.PARADA">
       </textarea>
     </md-input-container>
     <div>Alternativas</div>
-    <md-input-container ng-repeat="alternativa in professor.aula.alternativas track by $index">
+    <md-input-container ng-repeat="alternativa in $ctrl.aula.alternativas track by $index">
       <label>{{ $index + 1 }})</label>
       <textarea ng-model="alternativa"
-                ng-change="professor.editarAlternativa($index, alternativa)"
-                ng-disabled="professor.aula.status !== professor.status.PARADA"
+                ng-change="$ctrl.editarAlternativa($index, alternativa)"
+                ng-disabled="$ctrl.aula.status !== $ctrl.status.PARADA"
                 focus-me="{{ 'alternativa-' + $index + '-focus' }}">
       </textarea>
     </md-input-container>
-    <md-input-container ng-hide="professor.aula.status !== professor.status.PARADA">
+    <md-input-container ng-hide="$ctrl.aula.status !== $ctrl.status.PARADA">
       <label>Nova alternativa</label>
       <textarea focus-me="nova-alternativa-focus"
                 ng-model="alternativa"
-                ng-change="professor.adicionarAlternativa(alternativa); alternativa = ''">
+                ng-change="$ctrl.adicionarAlternativa(alternativa); alternativa = ''">
       </textarea>
     </md-input-container>
-    <div layout="row" layout-align="center center" ng-show="professor.aula.alternativas.length > 1">
+    <div layout="row" layout-align="center center" ng-show="$ctrl.aula.alternativas.length > 1">
       <md-button class="md-icon-button md-primary"
-                 ng-click="professor.iniciar()"
-                 ng-show="professor.aula.status !== professor.status.INICIADA">
+                 ng-click="$ctrl.iniciar()"
+                 ng-show="$ctrl.aula.status !== $ctrl.status.INICIADA">
         <md-tooltip>Iniciar</md-tooltip>
         <md-icon md-font-icon="fa-play" class="fa fa-2x"></md-icon>
       </md-button>
       <md-button class="md-icon-button md-accent"
-                 ng-click="professor.pausar()"
-                 ng-show="professor.aula.status === professor.status.INICIADA">
+                 ng-click="$ctrl.pausar()"
+                 ng-show="$ctrl.aula.status === $ctrl.status.INICIADA">
         <md-tooltip>Pausar</md-tooltip>
         <md-icon md-font-icon="fa-pause" class="fa fa-2x"></md-icon>
       </md-button>
       <md-button class="md-icon-button md-warn"
-                 ng-click="professor.parar()"
-                 ng-show="professor.aula.status !== professor.status.PARADA">
+                 ng-click="$ctrl.parar()"
+                 ng-show="$ctrl.aula.status !== $ctrl.status.PARADA">
         <md-tooltip>Parar</md-tooltip>
         <md-icon md-font-icon="fa-stop" class="fa fa-2x"></md-icon>
       </md-button>
     </div>
-    <div ng-if="professor.resultado">
+    <div ng-if="$ctrl.resultado">
       <h3 class="center">Resultados</h3>
 
       <md-progress-linear md-mode="determinate"
-                          ng-value="professor.resultado.prRespostas">
+                          ng-value="$ctrl.resultado.prRespostas">
       </md-progress-linear>
 
       <p class="center">
         <ng-pluralize class="center"
-                      count="professor.resultado.qtAlunos"
+                      count="$ctrl.resultado.qtAlunos"
                       when="{'0': 'Ninguém está conectado e ',
                              'one': '1 aluno conectado e ',
                              'other': '{} alunos conectados e '}">
         </ng-pluralize>
         <ng-pluralize class="center"
-                      count="professor.resultado.qtRespostas"
+                      count="$ctrl.resultado.qtRespostas"
                       when="{'0': 'ainda ninguém respondeu.',
                              'one': '1 aluno respondeu.',
                              'other': '{} alunos responderam.'}">
         </ng-pluralize>
       </p>
 
-      <div google-chart chart="professor.resultado.chart" style="height:300px; width:100%;"></div>
+      <div google-chart chart="$ctrl.resultado.chart" style="height:300px; width:100%;"></div>
     </div>
   </form>
 </md-content>

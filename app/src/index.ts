@@ -28,6 +28,7 @@ import {focusMe} from './common/directives/focus-me.directive';
 import {app} from './components/app/app.component';
 import {login} from './components/login/login.component';
 import {professor} from './components/professor/professor.component';
+import {questoes} from './components/questoes/questoes.component';
 import {aula} from './components/aula/aula.component';
 
 ngModule
@@ -50,10 +51,11 @@ ngModule
 
   .directive('focusMe', focusMe)
 
-  .directive('app', app)
-  .directive('login', login)
-  .directive('professor', professor)
-  .directive('aula', aula);
+  .component('app', app())
+  .component('login', login())
+  .component('professor', professor())
+  .component('questoes', questoes())
+  .component('aula', aula());
 
 const element = angular.element(document);
 

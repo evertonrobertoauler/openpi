@@ -1,12 +1,9 @@
 import {Usuario} from './../../common/services/usuario.service';
 
-export function app() {
+export function app(): ng.IComponentOptions {
   return {
-    restrict: 'E',
     template: require('./app.component.html'),
-    controller: AppComponent,
-    controllerAs: 'app',
-    bindToController: true
+    controller: AppComponent
   };
 }
 

@@ -14,6 +14,11 @@ export class RoutesConfig {
         template: '<professor></professor>',
         resolve: {loginRequired}
       })
+      .state('questoes', {
+        url: '/questoes',
+        template: '<questoes></questoes>',
+        resolve: {loginRequired}
+      })
       .state('aula', {
         url: '/aula/:hash',
         template: '<aula></aula>'

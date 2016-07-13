@@ -1,27 +1,27 @@
 <md-content class="center" flex flex-offset-gt-sm="20" flex-gt-sm="60">
 
-  <h3 ng-if="aula.disponivel === false">
+  <h3 ng-if="$ctrl.disponivel === false">
     Aula não disponível!
   </h3>
 
-  <div layout="column" ng-if="aula.aula.status !== undefined">
+  <div layout="column" ng-if="$ctrl.aula.status !== undefined">
     <h1>Aula</h1>
 
       <div layout="row" layout-align="center center">
-        <img ng-src="{{ aula.aula.professor.foto }}" class="foto">
+        <img ng-src="{{ $ctrl.aula.professor.foto }}" class="foto">
         <div>
-          <b>Professor(a)</b> {{ aula.aula.professor.nome }}
+          <b>Professor(a)</b> {{ $ctrl.aula.professor.nome }}
         </div>
       </div>
 
-    <h4 ng-show="aula.aula.status !== aula.status.INICIADA">
+    <h4 ng-show="$ctrl.aula.status !== $ctrl.status.INICIADA">
       Nenhuma avaliação disponível no momento!
     </h4>
 
-    <div ng-show="aula.aula.status === aula.status.INICIADA" layout="column">
-      <h3>{{ aula.aula.pergunta || 'Responda' }}</h3>
-      <md-radio-group ng-model="aula.resposta.alternativa" ng-change="aula.responder()">
-        <md-radio-button ng-repeat="alternativa in aula.aula.alternativas track by $index"
+    <div ng-show="$ctrl.aula.status === $ctrl.status.INICIADA" layout="column">
+      <h3>{{ $ctrl.aula.pergunta || 'Responda' }}</h3>
+      <md-radio-group ng-model="$ctrl.resposta.alternativa" ng-change="$ctrl.responder()">
+        <md-radio-button ng-repeat="alternativa in $ctrl.aula.alternativas track by $index"
                          ng-value="$index"
                          class="md-primary left">
           {{ alternativa }}
