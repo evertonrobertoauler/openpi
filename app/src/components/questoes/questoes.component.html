@@ -1,0 +1,36 @@
+<md-content layout="column" flex flex-offset-gt-sm="20" flex-gt-sm="60">
+
+  <div layout="row">
+    <md-button class="md-icon-button" ui-sref="professor" style="margin-top: 8px">
+      <md-tooltip>Voltar</md-tooltip>
+      <md-icon md-font-icon="fa-arrow-circle-left" class="fa" style="font-size: 36px"></md-icon>
+    </md-button>
+    <h3 flex class="center">Banco de questões</h3>
+  </div>
+
+  <md-list ng-cloak>
+    <md-subheader class="md-no-sticky">Perguntas cadastradas</md-subheader>
+    <md-list-item style="padding: 10px">
+      <p><b>1) Pergunta?</b><br/>a) Sim<br/>b) Não<br/>c) Talvez</p>
+      <md-button class="md-icon-button">
+        <md-tooltip>Excluir</md-tooltip>
+        <md-icon md-font-icon="fa-trash" class="fa" style="font-size: 36px"></md-icon>
+      </md-button>
+      <md-button class="md-icon-button">
+        <md-tooltip>Selecionar</md-tooltip>
+        <md-icon md-font-icon="fa-check" class="fa" style="font-size: 36px"></md-icon>
+      </md-button>
+      <md-divider></md-divider>
+    </md-list-item>
+  </md-list>
+
+  <div layout="column" layout-padding>
+    <md-input-container>
+      <label>Importar novas perguntas (substitua o texto abaixo seguindo o mesmo formato)</label>
+      <textarea ng-model="$ctrl.texto"></textarea>
+    </md-input-container>
+    <md-button class="md-raised md-primary" aria-label="Importar">
+      Importar
+    </md-button>
+  </div>
+</md-content>
