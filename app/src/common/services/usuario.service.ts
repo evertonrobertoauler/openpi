@@ -1,4 +1,4 @@
-import {Firebase} from './firebase.service';
+import {FirebaseService} from './firebase.service';
 
 export interface IPerfil extends AngularFireObject {
   id: string;
@@ -8,12 +8,12 @@ export interface IPerfil extends AngularFireObject {
 }
 
 export class Usuario {
-  static $inject = ['Firebase', '$state'];
+  static $inject = ['FirebaseService', '$state'];
 
   public perfil: IPerfil;
   public authData: any;
 
-  constructor(private firebase: Firebase, private $state) {
+  constructor(private firebase: FirebaseService, private $state) {
   }
 
   salvarPerfil() {
@@ -60,9 +60,9 @@ export class Usuario {
   }
 }
 
-loginRequired.$inject = ['Firebase', 'Usuario'];
+loginRequired.$inject = ['FirebaseService', 'Usuario'];
 
-export function loginRequired(firebase: Firebase, usuario: Usuario) {
+export function loginRequired(firebase: FirebaseService, usuario: Usuario) {
   return firebase.auth.$requireSignIn().then(authData => {
     if (!authData.isAnonymous) {
       usuario.authData = authData;

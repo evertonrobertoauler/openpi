@@ -11,7 +11,7 @@ export function professor(): ng.IComponentOptions {
 }
 
 class ProfessorComponent {
-  static $inject = ['$scope', '$window', '$timeout', 'Usuario', 'Aula', 'Url'];
+  static $inject = ['$scope', '$window', '$timeout', 'Usuario', 'alternativaFilter', 'Aula', 'Url'];
 
   public aula: IAula;
   public resultado;
@@ -19,7 +19,7 @@ class ProfessorComponent {
   public status = StatusAvaliacao;
 
   constructor(private $scope, private $window, private $timeout, public usuarioService: Usuario,
-              public aulaService: Aula, private urlService: Url) {
+              private alternativaFilter, public aulaService: Aula, private urlService: Url) {
     if (this.usuarioService.perfil.aula) {
       this.aula = this.aulaService.obterAula(this.usuarioService.perfil.aula);
       this.aula.$watch(() => this.calcularResultado());
@@ -115,7 +115,7 @@ class ProfessorComponent {
       });
 
       const rows = this.aula.alternativas.map((a, i) => {
-        return {c: [{v: `${i + 1}) ${a}`}, {v: totais[i]}]};
+        return {c: [{v: this.alternativaFilter(a, i)}, {v: totais[i]}]};
       });
 
       this.resultado = {

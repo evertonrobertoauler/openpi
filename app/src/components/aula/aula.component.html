@@ -24,7 +24,7 @@
         <md-radio-button ng-repeat="alternativa in $ctrl.aula.alternativas track by $index"
                          ng-value="$index"
                          class="md-primary left">
-          {{ alternativa }}
+          {{ alternativa | alternativa:$index }}
         </md-radio-button>
       </md-radio-group>
     </div>

@@ -18,10 +18,14 @@ import './index.scss';
 import {RoutesConfig, RoutesErrorConfig} from './config/routes.config';
 import {ThemingConfig} from './config/theme.config';
 
-import {Firebase} from './common/services/firebase.service';
+import {FirebaseService} from './common/services/firebase.service';
 import {Usuario} from './common/services/usuario.service';
 import {Aula} from './common/services/aula.service';
+import {Questoes} from './common/services/questoes.service';
 import {Url} from './common/services/url.service';
+
+import {pergunta} from './common/filters/pergunta.filter';
+import {alternativa} from './common/filters/alternativa.filter';
 
 import {focusMe} from './common/directives/focus-me.directive';
 
@@ -44,10 +48,14 @@ ngModule
 
   .run(RoutesErrorConfig)
 
-  .service('Firebase', Firebase)
+  .service('FirebaseService', FirebaseService)
   .service('Usuario', Usuario)
   .service('Aula', Aula)
+  .service('Questoes', Questoes)
   .service('Url', Url)
+
+  .filter('pergunta', pergunta)
+  .filter('alternativa', alternativa)
 
   .directive('focusMe', focusMe)
 

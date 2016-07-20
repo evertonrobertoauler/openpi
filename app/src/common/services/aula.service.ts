@@ -1,4 +1,4 @@
-import {Firebase} from './firebase.service';
+import {FirebaseService} from './firebase.service';
 import {IPerfil} from './usuario.service';
 import * as _ from 'lodash';
 
@@ -18,11 +18,11 @@ export enum StatusAvaliacao {
 }
 
 export class Aula {
-  static $inject = ['$q', 'Firebase'];
+  static $inject = ['$q', 'FirebaseService'];
 
   public authData: any;
 
-  constructor(private $q, private firebase: Firebase) {
+  constructor(private $q, private firebase: FirebaseService) {
   }
 
   obterAulaAluno(hash: string) {

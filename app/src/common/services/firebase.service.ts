@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 import * as _ from 'lodash';
 
-export class Firebase {
+export class FirebaseService {
   static $inject = ['FIREBASE_CONFIG', '$firebaseArray', '$firebaseObject', '$firebaseAuth', '$q'];
 
   public auth: any;

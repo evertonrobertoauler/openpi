@@ -1,3 +1,5 @@
+import {Questoes, IQuestao} from './../../common/services/questoes.service';
+
 export function questoes(): ng.IComponentOptions {
   return {
     template: require('./questoes.component.html'),
@@ -16,11 +18,22 @@ const EXEMPLO = [
 ];
 
 class QuestoesComponent {
-  static $inject = [];
+  static $inject = ['Questoes'];
 
   texto: string;
 
-  constructor() {
+  questoes: AngularFireArray;
+
+  constructor(private questoesService: Questoes) {
     this.texto = EXEMPLO.join('\n');
+
+    this.questoes = this.questoesService.obterQuestoes();
+
+    // this.questoes.$loaded().then(() => {
+    //   this.questoes.$add({
+    //     titulo: 'Pergunta ?',
+    //     alternativas: ['Sim', 'Não', 'Talves']
+    //   });
+    // });
   }
 }

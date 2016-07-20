@@ -26,7 +26,7 @@
     </md-input-container>
     <div>Alternativas</div>
     <md-input-container ng-repeat="alternativa in $ctrl.aula.alternativas track by $index">
-      <label>{{ $index + 1 }})</label>
+      <label>{{ '' | alternativa:$index }}</label>
       <textarea ng-model="alternativa"
                 ng-change="$ctrl.editarAlternativa($index, alternativa)"
                 ng-disabled="$ctrl.aula.status !== $ctrl.status.PARADA"
