@@ -1,0 +1,40 @@
+<md-dialog aria-label="Importação"  ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Perguntas</h2>
+        <span flex></span>
+        <md-button ng-click="$ctrl.fechar()" aria-label="Fechar">
+          Fechar
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <p ng-if="!$ctrl.questoes.length">Nenhuma pergunta válida para importação!</p>
+
+        <md-list ng-cloak ng-if="$ctrl.questoes.length">
+          <md-list-item style="padding: 10px" ng-repeat="questao in $ctrl.questoes track by $index">
+            <div class="md-list-item-text" flex>
+              <h3>{{ questao.titulo | pergunta:$index }}</h3>
+              <p ng-repeat="alternativa in questao.alternativas track by $index">
+                {{ alternativa | alternativa:$index }}
+              </p>
+            </div>
+            <md-divider></md-divider>
+          </md-list-item>
+        </md-list>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="$ctrl.fechar()" aria-label="Não importar">
+        Não
+      </md-button>
+      <md-button ng-click="$ctrl.importar()" ng-disabled="!$ctrl.questoes.length" aria-label="Importar">
+        Importar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
+

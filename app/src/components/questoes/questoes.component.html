@@ -6,7 +6,8 @@
       <md-icon md-font-icon="fa-arrow-circle-left" class="fa" style="font-size: 36px"></md-icon>
     </md-button>
     <h3 flex class="center">Banco de questões</h3>
-    <md-button class="md-icon-button md-warn" ng-if="$ctrl.questoes.length" style="margin: 8px">
+    <md-button class="md-icon-button md-warn" ng-if="$ctrl.questoes.length" style="margin: 8px"
+               ng-click="$ctrl.limparBanco($event)">
       <md-tooltip>Limpar banco de questões</md-tooltip>
       <md-icon md-font-icon="fa-trash" class="fa" style="font-size: 34px"></md-icon>
     </md-button>
@@ -18,14 +19,14 @@
       <div class="md-list-item-text" flex>
         <h3>{{ questao.titulo | pergunta:$index }}</h3>
         <p ng-repeat="alternativa in questao.alternativas track by $index">
-          {{ alternativa | alternativa:$index  }}
+          {{ alternativa | alternativa:$index }}
         </p>
       </div>
       <md-button class="md-icon-button">
         <md-tooltip>Iniciar</md-tooltip>
         <md-icon md-font-icon="fa-play" class="fa" style="font-size: 34px"></md-icon>
       </md-button>
-      <md-button class="md-icon-button">
+      <md-button class="md-icon-button" ng-click="$ctrl.apagarQuestao($event, questao)">
         <md-tooltip>Excluir</md-tooltip>
         <md-icon md-font-icon="fa-trash" class="fa" style="font-size: 36px"></md-icon>
       </md-button>
@@ -35,11 +36,18 @@
 
   <div layout="column" layout-padding>
     <md-input-container>
-      <label>Importar novas perguntas (substitua o texto abaixo seguindo o mesmo formato)</label>
-      <textarea ng-model="$ctrl.texto"></textarea>
+      <label>Importar novas perguntas (seguindo como exemplo o formato do texto abaixo)</label>
+      <textarea ng-model="$ctrl.texto" placeholder="{{ $ctrl.placeholder }}"></textarea>
     </md-input-container>
-    <md-button class="md-raised md-primary" aria-label="Importar">
-      Importar
-    </md-button>
+    <div layout="row" layout-align="center">
+      <md-button class="md-raised md-warn" ng-click="$ctrl.texto = ''" ng-disabled="!$ctrl.texto">
+        <md-tooltip>Limpar o campo acima</md-tooltip>
+        Limpar
+      </md-button>
+      <md-button class="md-raised md-primary" ng-click="$ctrl.importarPerguntas($event)">
+        <md-tooltip>Importar novas perguntas</md-tooltip>
+        Importar
+      </md-button>
+    </div>
   </div>
 </md-content>
