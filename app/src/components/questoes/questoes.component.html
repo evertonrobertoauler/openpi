@@ -22,7 +22,7 @@
           {{ alternativa | alternativa:$index }}
         </p>
       </div>
-      <md-button class="md-icon-button">
+      <md-button class="md-icon-button" ng-click="$ctrl.iniciarQuestao($event, questao)">
         <md-tooltip>Iniciar</md-tooltip>
         <md-icon md-font-icon="fa-play" class="fa" style="font-size: 34px"></md-icon>
       </md-button>

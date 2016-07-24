@@ -1,7 +1,6 @@
-import {Usuario} from './../../common/services/usuario.service';
-import {IAula, StatusAvaliacao, Aula} from './../../common/services/aula.service';
-import {Url} from './../../common/services/url.service';
+import {IAula, StatusAvaliacao} from './../../common/services/aula.service';
 import * as _ from 'lodash';
+import {Professor} from '../../common/services/professor.service';
 
 export function professor(): ng.IComponentOptions {
   return {
@@ -11,52 +10,29 @@ export function professor(): ng.IComponentOptions {
 }
 
 class ProfessorComponent {
-  static $inject = ['$scope', '$window', '$timeout', 'Usuario', 'alternativaFilter', 'Aula', 'Url'];
+  static $inject = ['$scope', '$timeout', 'alternativaFilter', 'Professor'];
 
   public aula: IAula;
   public resultado;
 
   public status = StatusAvaliacao;
 
-  constructor(private $scope, private $window, private $timeout, public usuarioService: Usuario,
-              private alternativaFilter, public aulaService: Aula, private urlService: Url) {
-    if (this.usuarioService.perfil.aula) {
-      this.aula = this.aulaService.obterAula(this.usuarioService.perfil.aula);
+  constructor(private $scope, private $timeout, private alternativaFilter, public professorService: Professor) {
+    this.obterAula();
+  }
+
+  obterAula() {
+    this.professorService.obterAula().then(aula => {
+      this.aula = aula;
       this.aula.$watch(() => this.calcularResultado());
-    } else {
-      this.gerarNovoHash();
-    }
+    });
   }
 
   gerarNovoHash() {
-    let backup = this.aula;
-
-    return this.aulaService
-      .obterHashDisponivel()
-      .then(hash => {
-        this.usuarioService.perfil.aula = hash;
-        this.usuarioService.perfil.$save();
-
-        this.aula = this.aulaService.obterAula(hash);
-        this.aula.status = this.status.PARADA;
-        this.aula.professor = this.usuarioService.perfil;
-
-        const longUrl = `${this.$window.location.origin}/#/aula/${hash}`;
-
-        this.urlService.gerarShortUrl(longUrl).then(res => {
-          this.aula.url = (res.result.id || '').replace('https://', '');
-          this.aula.$save();
-        });
-
-        if (backup) {
-          this.aula.pergunta = backup.pergunta || '';
-          this.aula.alternativas = backup.alternativas || [];
-          backup.$remove();
-        }
-
-        this.aula.$save();
-        this.aula.$watch(() => this.calcularResultado());
-      });
+    this.professorService.gerarNovoHash(this.aula).then(aula => {
+      this.aula = aula;
+      this.aula.$watch(() => this.calcularResultado());
+    });
   }
 
   limpar() {

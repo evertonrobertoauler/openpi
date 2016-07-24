@@ -21,6 +21,7 @@ import {ThemingConfig} from './config/theme.config';
 import {FirebaseService} from './common/services/firebase.service';
 import {Usuario} from './common/services/usuario.service';
 import {Aula} from './common/services/aula.service';
+import {Professor} from './common/services/professor.service';
 import {Questoes} from './common/services/questoes.service';
 import {Url} from './common/services/url.service';
 
@@ -51,6 +52,7 @@ ngModule
   .service('FirebaseService', FirebaseService)
   .service('Usuario', Usuario)
   .service('Aula', Aula)
+  .service('Professor', Professor)
   .service('Questoes', Questoes)
   .service('Url', Url)
 

@@ -1,4 +1,5 @@
 import {Questoes, IQuestao} from './../../common/services/questoes.service';
+import {Professor} from './../../common/services/professor.service';
 
 export function questoes(): ng.IComponentOptions {
   return {
@@ -21,7 +22,7 @@ const REGEXP_PERGUNTA = /^\s*\d+\s*\.\s*/;
 const REGEXP_ALTERNATIVA = /^\s*\w+\s*\)\s*/;
 
 class QuestoesComponent {
-  static $inject = ['Questoes', '$mdDialog'];
+  static $inject = ['Questoes', 'Professor', '$mdDialog', '$state'];
 
   placeholder: string = EXEMPLO.join('\n');
 
@@ -29,7 +30,8 @@ class QuestoesComponent {
 
   questoes: AngularFireArray;
 
-  constructor(private questoesService: Questoes, private $mdDialog: angular.material.IDialogService) {
+  constructor(private questoesService: Questoes, private professorService: Professor,
+              private $mdDialog: angular.material.IDialogService, private $state: angular.ui.IStateService) {
     this.questoes = this.questoesService.obterQuestoes();
   }
 
@@ -58,6 +60,22 @@ class QuestoesComponent {
       .cancel('Não');
 
     this.$mdDialog.show(confirm).then(() => <any>this.questoes.$ref().remove());
+  }
+
+  iniciarQuestao($event, questao: IQuestao) {
+    this.professorService
+      .iniciarAtividade(questao)
+      .catch((erro) => {
+        const confirm = this.$mdDialog.confirm()
+          .title(erro)
+          .ariaLabel('Confirmar ação')
+          .targetEvent($event)
+          .ok('Sim')
+          .cancel('Não');
+
+        return this.$mdDialog.show(confirm).then(() => this.professorService.iniciarAtividade(questao, true));
+      })
+      .then(() => this.$state.go('professor'));
   }
 
   apagarQuestao($event, questao: IQuestao) {
